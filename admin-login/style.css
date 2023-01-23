@@ -1,0 +1,46 @@
+body {
+    background-color: #efefef !important;
+}
+
+.bg-img {
+    position: fixed;
+    z-index: -999;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1.25);
+}
+
+.login-form {
+    border-radius: 10px !important;
+    box-shadow: 18px 18px 47px -18px rgba(0,0,0,0.75) !important;
+}
+
+.submit-btn {
+    border: none !important;
+    background-color: #ee3131 !important;
+    transition: 250ms ease-in;
+}
+
+.submit-btn:hover {
+    border: 1px solid #ee3131 !important;
+    background-color: #fff !important;
+    color: #000 !important;
+}
+
+.forgot-password:hover {
+    color: #ee3131 !important;
+}
+
+input {
+    border: none !important;
+    border-bottom: 2px solid #004CFF !important;    
+    border-radius: 0 !important;
+    border-radius: 5px !important;
+    box-shadow: none !important;
+}
+
+input:focus,
+input:valid {
+    transition: border 350ms ease-in-out;
+    border-bottom: 2px solid #ee3131 !important;
+}
