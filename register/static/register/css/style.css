@@ -1,0 +1,197 @@
+body {
+    background-color: #efefef !important;
+}
+
+.bg-img {
+    position: fixed;
+    z-index: -999;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1.25);
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 300px;
+    align-items: center;
+}
+
+.form-wrapper {
+    width: 45%;
+}
+
+@media (max-width: 1024px) {
+    .form-wrapper {
+        
+        width: 52%;
+    }
+}
+
+@media (max-width: 990px) {
+    .form-wrapper {
+        /* border: 1px solid blue; */
+        width: 70%;
+    }
+    .adolf-logo {
+        width: 800px;
+        height: 90px;
+        /* left: 100px; */
+    }
+}
+
+@media (max-width: 430px) {
+    .form-wrapper {
+        /* border: 1px solid blue; */
+        margin-left: 18%;
+        width: 90%;
+    }
+
+    .adolf-logo {
+        width: 500px;
+        height: 50px;
+        /* left: 100px; */
+    }
+}
+
+@media (max-width: 380px) {
+    .form-wrapper {
+        /* border: 1px solid blue; */
+        width: 110%;
+        margin-left: 35%;
+    }
+}
+
+
+@media (max-width: 330px) {
+    .form-wrapper {
+        /* border: 1px solid blue; */
+        width: 120%;
+        margin-left: 50%;
+    }
+}
+
+
+.adolf-logo {
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+.login-form {
+    border-radius: 10px !important;
+    box-shadow: 18px 18px 47px -18px rgba(0,0,0,0.75) !important;
+
+}
+
+.submit-btn {
+    border: none !important;
+    background-color: #ee3131 !important;
+    transition: 250ms ease-in;
+}
+
+.submit-btn:hover {
+    border: 1px solid #ee3131 !important;
+    background-color: #fff !important;
+    color: #000 !important;
+}
+
+.forgot-password:hover {
+    color: #ee3131 !important;
+}
+
+.user-value {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-top: 1px solid black;
+}
+
+.login-form-check {
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+
+.login-form-check:hover .radio {
+    /* background-color: #ee3131; */
+    border: 1px solid #ee3131;
+}
+
+
+.text-color {
+    color: #007aff;
+    transition: 250ms ease-in-out;
+}
+
+.text-color:hover {
+    color: #ee3131;
+}
+
+
+
+.retailer-form, 
+.retailer-form-hidden {
+    position: relative;
+    top: 8px;
+    left: 0;
+    width: 100%;
+}
+
+.retailer-form-hidden {
+    display: none;
+}
+
+.retailer-form {
+    display: flex;
+    flex-direction: column;
+    z-index: 99;
+}
+
+.accordion-item-border {
+    border: none !important;
+    border-bottom: 2px solid #004CFF !important;    
+    border-radius: 5px !important;
+    box-shadow: none !important;
+    
+}
+
+.accordion-item-noborder {
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.distributor-hidden,
+.retailer-hidden {
+    display: none;
+}
+
+#input-password,
+#input-username {
+    border: none !important;
+    border-bottom: 2px solid #004CFF !important;    
+    border-radius: 0 !important;
+    border-radius: 5px !important;
+    box-shadow: none !important;
+}
+
+
+
+#input-password:focus, 
+#input-password:valid,
+#input-username:focus,
+#input-username:valid {
+    transition: border 350ms ease-in-out;
+    border-bottom: 2px solid #ee3131 !important;
+}
+
+
