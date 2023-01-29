@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
-from django.core.exceptions import ValidationError
 from django.contrib import messages
 
 # Create your views here.
@@ -21,10 +20,8 @@ def login_check(request):
                     return redirect('dashboard-retailer')
             else:
                 messages.error(request, "This account is inactive.")
-                return redirect('login-view')
         else:
             messages.error(request, "You have entered an invalid email / password combination.")
-            return redirect('login-view')
 
-    else:
-        return render(request, 'register/login.html')
+        return redirect('login-view')
+    return render(request, 'register/login.html')
