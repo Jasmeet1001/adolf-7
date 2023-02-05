@@ -1,4 +1,272 @@
 {% extends 'dashboard/base.html' %}
+{% load static %}
 {% block content %}
-<h1>This is the Adolf Admin dashboard</h1>
+    <div class="l-navbar" id="nav-bar">
+        <nav class="nav">
+            <div> 
+                <a href="#" class="nav_logo"> 
+                    <!-- <img src="img/adolf7-automotive-industries-pvt-ltd-only-logo.png" alt=""> -->
+                    <i class='bx bx-child nav_icon' ></i>
+                    Adolf7
+                </a>
+                <div class="nav_list"> 
+                    <a href="#" class="nav_link active"> 
+                        <i class='bx bx-grid-alt nav_icon'></i> 
+                        <span class="nav_name">Dashboard</span> 
+                    </a> 
+                    <a href="#" class="nav_link "> 
+                        <i class='bx bx-plus nav_icon'></i> 
+                        <span class="nav_name">New Order</span> 
+                    </a> 
+                    <a href="#" class="nav_link"> 
+                        <i class='bx bx-rupee nav_icon'></i> 
+                        <span class="nav_name">Payments</span> 
+                    </a> 
+                </div>
+            </div> 
+        </nav>
+    </div>
+
+    <div class="main-wrapper pt-2">
+        <h4><strong>Main</strong> Dashboard</h4>
+
+        <!-- Recent Transitions Starts -->
+        <div class="col-12">
+            <div class="card recent-sales overflow-auto">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <h5 class="card-title">
+                        Recent Transtions 
+                        <span>| 
+                            <span class="filter-tag">{{request.user.first_name}} {{request.user.last_name}}</span>
+                        </span>
+                    </h5>
+                    <div class="filter">
+                        <a class="icon" href="#" data-bs-toggle="dropdown">
+                            <i class='bx bx-dots-horizontal-rounded px-2'></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                            <li class="dropdown-header text-start">
+                                <h6>Filter</h6>
+                            </li>
+                            <div class="dropdown-things">
+                                <li>
+                                    <a class="dropdown-item" href="#">Today</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">This Month</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">This Year</a>
+                                </li>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+
+                <table class="table table-borderless ">
+                    <thead>
+                        <tr class="table-heading">
+                            <th scope="col">#</th>
+                            <th scope="col">Customer</th>
+                            <th scope="col">Product</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                <a href="#">#2457</a>
+                            </th>
+                            <td>Brandon Jacob</td>
+                            <td >
+                                <a href="" class="text-primary recent-t">At praesentium minu</a>
+                            </td>
+                            <td>$64</td>
+                            <td>
+                                <span class="badge bg-success">Approved</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <a href="#">#2147</a>
+                            </th>
+                            <td>Bridie Kessler</td>
+                            <td>
+                                <a href="#" class="text-primary recent-t">Blanditiis dolor omnis similique</a>
+                            </td>
+                            <td>$47</td>
+                            <td>
+                                <span class="badge bg-warning">Pending</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <a href="#">#2049</a>
+                            </th>
+                            <td>Ashleigh Langosh</td>
+                            <td>
+                                <a href="#" class="text-primary recent-t">At recusandae consectetur</a>
+                            </td>
+                            <td>$147</td>
+                            <td>
+                                <span class="badge bg-success">Approved</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+        <!-- Recent Transitions Ends -->
+
+        <!-- Recent Activity Starts -->
+        <div class="col-12">
+            <div class="card mt-3 recent-activity">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <h5 class="card-title">
+                            Recent Activity 
+                            <span>| 
+                                <span class="filter-tag">{{request.user.first_name}} {{request.user.last_name}}</span>
+                            </span>
+                        </h5>
+                        <div class="filter">
+                            <a class="icon" href="#" data-bs-toggle="dropdown">
+                                <i class='bx bx-dots-horizontal-rounded px-2'></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                <li class="dropdown-header text-start">
+                                    <h6>Filter</h6>
+                                </li>
+                                <div class="dropdown-things">
+                                    <li>
+                                        <a class="dropdown-item" href="#">Today</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">This Month</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">This Year</a>
+                                    </li>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="activity">
+                        <div class="activity-item d-flex">
+                            <div class="activite-label">
+                                <span class="filter-tag">{{request.user.first_name}} {{request.user.last_name}}</span>
+                            </div>
+                            <i class='bx bxs-circle activity-badge text-success align-self-start'></i>
+                            <div class="activity-content">
+                                <span class="text-dark">{{request.user.first_name}} {{request.user.last_name}}</span>
+                            </div>
+                        </div>
+                        <div class="activity-item d-flex">
+                            <div class="activite-label">
+                                <span class="filter-tag">{{request.user.first_name}} {{request.user.last_name}}</span>
+                            </div>
+                            <i class='bx bxs-circle activity-badge text-danger align-self-start'></i>
+                            <div class="activity-content">
+                                <span class="text-dark">{{request.user.first_name}} {{request.user.last_name}}</span>
+                            </div>
+                        </div>
+                        <div class="activity-item d-flex">
+                            <div class="activite-label">
+                                <span class="filter-tag">{{request.user.first_name}} {{request.user.last_name}}</span>
+                            </div>
+                            <i class='bx bxs-circle activity-badge text-info align-self-start'></i>
+                            <div class="activity-content">
+                                <span class="text-dark">{{request.user.first_name}} {{request.user.last_name}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Recent Activity Ends -->
+
+        <!-- Top Selling Starts -->
+        <div class="col-12">
+            <div class="card top-selling overflow-auto">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <h5 class="card-title">
+                        Top Selling 
+                        <span>| 
+                            <span class="filter-tag">{{request.user.first_name}} {{request.user.last_name}}</span>
+                        </span>
+                    </h5>
+                    <div class="filter">
+                        <a class="icon" href="#" data-bs-toggle="dropdown">
+                            <i class='bx bx-dots-horizontal-rounded px-2'></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                            <li class="dropdown-header text-start">
+                                <h6>Filter</h6>
+                            </li>
+                            <div class="dropdown-things">
+                                <li>
+                                    <a class="dropdown-item" href="#">Today</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">This Month</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">This Year</a>
+                                </li>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+
+                <table class="table table-borderless ">
+                    <thead>
+                        <tr class="table-heading">
+                            <th scope="col">Preview</th>
+                            <th scope="col">Product</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Sold</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                <a href="#" class="top-selling-img">
+                                    <img src="{% static 'dashboard/img/pp.PNG'%}"  alt="">
+                                </a>
+                            </th>
+                            <td class="text-primary">Brandon Jacob</td>
+                            <td>$64</td>
+                            <td>64</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <a href="#" class="top-selling-img">
+                                    <img src="{% static 'dashboard/img/pp.PNG'%}"  alt="">
+                                </a>
+                            </th>
+                            <td class="text-primary">Bridie Kessler</td>
+                            <td>$64</td>
+                            <td>64</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <a href="#" class="top-selling-img">
+                                    <img src="{% static 'dashboard/img/pp.PNG'%}"  alt="">
+                                </a>
+                            </th>
+                            <td class="text-primary">Ashleigh Langosh</td>
+                            <td>$64</td>
+                            <td>64</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+
+    </div>
 {% endblock content %}
