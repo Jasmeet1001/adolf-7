@@ -25,6 +25,11 @@
     /* padding-left: 30px; */
 }
 
+.img-hidden {
+    display: none;
+    /* border: 1px solid black; */
+}
+
 .form-wrapper {
     box-shadow: 18px 18px 47px -18px rgba(0,0,0,0.75) !important;
     width: 500px ;
@@ -76,8 +81,6 @@
         padding-left: 0px;
         /* border: 1px solid black; */
     }
-
-
 }
 
 
