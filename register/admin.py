@@ -6,10 +6,10 @@ from .models import User
 class UserAdmin(UAdmin):
     model = User
     list_display = ('phone_number', 'first_name', 'last_name', 'is_staff', 'is_active',)
-    list_filter = ('phone_number', 'first_name', 'last_name', 'is_staff', 'is_active',)
+    list_filter = ('is_staff', 'is_active', 'groups')
     fieldsets = (
         (None, {'fields': ('phone_number', 'first_name', 'last_name', 'email', 'password')}),
-        ('Permissions', {'fields': ('is_adolf_staff', 'is_distributer', 'is_retailer', 'is_staff', 'is_active')}),
+        ('Permissions', {'fields': ('is_staff', 'is_active', 'is_superuser', 'groups')}),
     )
     add_fieldsets = (
         (None, {

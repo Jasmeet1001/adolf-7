@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
+from dashboard.models import AdolfAdmin, Retailer, Distributer
 
 # Create your views here.
 def login_check(request):
@@ -12,11 +13,11 @@ def login_check(request):
         if user:
             if user.is_active:  # type: ignore 
                 login(request, user)
-                if user.is_adolf_staff:  # type: ignore 
+                if AdolfAdmin.objects.filter(user=user).exists():
                     return redirect('dashboard-admin')
-                elif user.is_distributer:  # type: ignore 
+                elif Distributer.objects.filter(user=user).exists():
                     return redirect('dashboard-distributer')
-                elif user.is_retailer:  # type: ignore 
+                elif Retailer.objects.filter(user=user).exists():
                     return redirect('dashboard-retailer')
             else:
                 messages.error(request, "This account is inactive.")

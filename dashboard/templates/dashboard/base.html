@@ -8,7 +8,7 @@
     <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css' rel='stylesheet'>
     <link href='https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="{% static 'dashboard/css/style.css' %}">       
-    <title>Adolf7 - Retailer</title>
+    <title>Adolf7</title>
 </head>        
 <body id="body-wrapper">
     
@@ -18,7 +18,7 @@
         </div>
         <div class="profile-dropdown ">
             <a class="nav-link dropdown-toggle text-end w-100" href="#" data-bs-toggle="dropdown">
-                <img src="{% static 'dashboard/img/pp.PNG'%}" class="profile-img" alt=""/> 
+                {% block pfp %}{% endblock %}
             </a>
             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                 <li class="dropdown-header text-start">
@@ -29,7 +29,7 @@
                         <a class="dropdown-item" href="#">Profile</a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="#">Logout</a>
+                        <a class="dropdown-item" href="{% url 'logout-view' %}">Logout</a>
                     </li>
                 </div>
             </ul>
