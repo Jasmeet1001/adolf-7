@@ -5,7 +5,7 @@ from PIL import Image
 # Create your models here.
 class CommonInfo(models.Model):
     user = models.OneToOneField(User, on_delete=models.PROTECT)
-    photo = models.FileField(default='media/default.jpg', upload_to='profile_pics')
+    photo = models.FileField(default='default.jpg', upload_to='profile_pics')
     # user_type = models.CharField(max_length=20)
     
     def save(self, *args, **kwargs):

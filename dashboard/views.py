@@ -27,14 +27,15 @@ def admin_page(request):
     return render(request, 'dashboard/admin.html', context)
 
 @login_required
-def pricelist_view(request):
+def order_view(request):
+    # pricelist_all = PriceList.objects.filter(id__lt=190)
     pricelist_all = PriceList.objects.all()
 
     context = {
         'pricelist_obj': pricelist_all
     }
 
-    return render(request, 'dashboard/pricelist.html', context)
+    return render(request, 'dashboard/neworder.html', context)
 
 @login_required
 @user_passes_test(is_distributer)
