@@ -19,14 +19,10 @@
                         <i class='bx bx-grid-alt nav_icon'></i> 
                         <span class="nav_name">Dashboard</span> 
                     </a>
-                    <a href="{% url 'pricelist-view' %}" class="nav_link active"> 
-                        <i class='bx bx-grid-alt nav_icon'></i> 
-                        <span class="nav_name">Price List</span> 
-                    </a>
-                    <a href="#" class="nav_link "> 
+                    <a href="{% url 'order-view' %}" class="nav_link "> 
                         <i class='bx bx-plus nav_icon'></i> 
                         <span class="nav_name">New Order</span> 
-                    </a> 
+                    </a>
                     <a href="#" class="nav_link"> 
                         <i class='bx bx-rupee nav_icon'></i> 
                         <span class="nav_name">Payments</span> 
@@ -180,80 +176,80 @@
         <!-- Top Selling Starts -->
         <div class="col-12">
             <div class="card top-selling overflow-auto">
-            <div class="card-body">
-                <div class="d-flex justify-content-between">
-                    <h5 class="card-title">
-                        Top Selling 
-                        <span>| 
-                            <span class="filter-tag">{{request.user.first_name}} {{request.user.last_name}}</span>
-                        </span>
-                    </h5>
-                    <div class="filter">
-                        <a class="icon" href="#" data-bs-toggle="dropdown">
-                            <i class='bx bx-dots-horizontal-rounded px-2'></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                            <li class="dropdown-header text-start">
-                                <h6>Filter</h6>
-                            </li>
-                            <div class="dropdown-things">
-                                <li>
-                                    <a class="dropdown-item" href="#">Today</a>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <h5 class="card-title">
+                            Top Selling 
+                            <span>| 
+                                <span class="filter-tag">{{request.user.first_name}} {{request.user.last_name}}</span>
+                            </span>
+                        </h5>
+                        <div class="filter">
+                            <a class="icon" href="#" data-bs-toggle="dropdown">
+                                <i class='bx bx-dots-horizontal-rounded px-2'></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                <li class="dropdown-header text-start">
+                                    <h6>Filter</h6>
                                 </li>
-                                <li>
-                                    <a class="dropdown-item" href="#">This Month</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="#">This Year</a>
-                                </li>
-                            </div>
-                        </ul>
+                                <div class="dropdown-things">
+                                    <li>
+                                        <a class="dropdown-item" href="#">Today</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">This Month</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">This Year</a>
+                                    </li>
+                                </div>
+                            </ul>
+                        </div>
                     </div>
-                </div>
 
-                <table class="table table-borderless ">
-                    <thead>
-                        <tr class="table-heading">
-                            <th scope="col">Preview</th>
-                            <th scope="col">Product</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Sold</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">
-                                <a href="#" class="top-selling-img">
-                                    <img src="{% static 'dashboard/img/pp.PNG'%}"  alt="pfp">
-                                </a>
-                            </th>
-                            <td class="text-primary">Brandon Jacob</td>
-                            <td>$64</td>
-                            <td>64</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                <a href="#" class="top-selling-img">
-                                    <img src="{% static 'dashboard/img/pp.PNG'%}"  alt="">
-                                </a>
-                            </th>
-                            <td class="text-primary">Bridie Kessler</td>
-                            <td>$64</td>
-                            <td>64</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                <a href="#" class="top-selling-img">
-                                    <img src="{% static 'dashboard/img/pp.PNG'%}"  alt="">
-                                </a>
-                            </th>
-                            <td class="text-primary">Ashleigh Langosh</td>
-                            <td>$64</td>
-                            <td>64</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                    <table class="table table-borderless ">
+                        <thead>
+                            <tr class="table-heading">
+                                <th scope="col">Preview</th>
+                                <th scope="col">Product</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Sold</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">
+                                    <a href="#" class="top-selling-img">
+                                        <img src="{% static 'dashboard/img/pp.PNG'%}"  alt="pfp">
+                                    </a>
+                                </th>
+                                <td class="text-primary">Brandon Jacob</td>
+                                <td>$64</td>
+                                <td>64</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    <a href="#" class="top-selling-img">
+                                        <img src="{% static 'dashboard/img/pp.PNG'%}"  alt="">
+                                    </a>
+                                </th>
+                                <td class="text-primary">Bridie Kessler</td>
+                                <td>$64</td>
+                                <td>64</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    <a href="#" class="top-selling-img">
+                                        <img src="{% static 'dashboard/img/pp.PNG'%}"  alt="">
+                                    </a>
+                                </th>
+                                <td class="text-primary">Ashleigh Langosh</td>
+                                <td>$64</td>
+                                <td>64</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
