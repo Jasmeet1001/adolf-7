@@ -1,0 +1,38 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<h1>Add User</h1>
+{% for message in messages %}
+    {% if message.tags == 'error' %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% else %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+    {% endif %}
+{% endfor %}
+  <form method="post" id="order-form">
+    {% csrf_token %}
+    {{ role_form.as_p }}
+    {{ user_form.as_p }}
+
+    <div id="admin-form" style="display: none;">
+        {{ admin_form.as_p }}
+    </div>
+
+    <div id="distributor-form" style="display: show;">
+        {{ dist_form.as_p }}
+    </div>
+
+    <div id="retailer-form" style="display: none;">
+        {{ ret_form.as_p }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create User</button>
+  </form>
+  <script src="{% static 'dashboard/js/showform.js' %}"></script>
+{% endblock %}
