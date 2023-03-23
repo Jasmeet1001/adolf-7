@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block pfp %}
-<img src="{{ user.adolfadmin.photo.url }}" alt="mdo" width="32" height="32" class="rounded-circle">
+<img src="{{ user.adolfadmin.photo.url }}" alt="pfp" class="rounded-circle">
 {% endblock pfp %}
 
 {% block content %}
@@ -29,7 +29,11 @@
                     </a> 
                     <a href="#" class="nav_link"> 
                         <i class='bx bx-rupee nav_icon'></i> 
-                        <span class="nav_name">Payments</span> 
+                        <span class="nav_name">Payments</span>
+                    </a> 
+                    <a href="{% url 'admin-createuser' %}" class="nav_link"> 
+                        <i class='bx bx-rupee nav_icon'></i> 
+                        <span class="nav_name">Create User</span>
                     </a> 
                 </div>
             </div> 
