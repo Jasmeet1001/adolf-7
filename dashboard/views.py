@@ -28,8 +28,8 @@ def admin_page(request):
 
 @login_required
 def order_view(request):
-    # pricelist_all = PriceList.objects.filter(id__lt=190)
-    pricelist_all = PriceList.objects.all()
+    pricelist_all = PriceList.objects.filter(id__lt=190)
+    # pricelist_all = PriceList.objects.all()
 
     context = {
         'pricelist_obj': pricelist_all

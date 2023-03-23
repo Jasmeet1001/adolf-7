@@ -73,13 +73,13 @@
                         <thead>
                             <tr class="table-heading">
                                 <th scope="col">Vehical Type</th>
-                                <th scope="col">color</th>
-                                <th scope="col">product_name</th>
-                                <th scope="col">product_image</th>
-                                <th scope="col">item_desc</th>
+                                <th scope="col">Color</th>
+                                <th scope="col">Product Name</th>
+                                <th scope="col">Product Image</th>
+                                <th scope="col">Item Description</th>
                                 <th scope="col">uom</th>
                                 <th scope="col">Quantity</th>
-                                <th scope="col">add</th>
+                                <th scope="col">Add To Cart</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -93,10 +93,19 @@
                                     <td>{{ prices.uom }}</td>
     
                                     <td>  
-                                         
-                                    </td>
+                                        <input type="text" class="{{prices.id}} quantiy-Input" style="width: 55px;" min="0" value="1">
+                                </td>
                                     <td>
-                                      <button class="addBtn" id="invoceDownlaod" data-color="{{prices.color}}" data-product_name="{{prices.product_name}}" data-vehical_type="{{prices.vehical_type}}" data-id="{{prices.id}}" data-item_desc="{{prices.item_desc}}" data-uom="{{prices.uom}}" onclick="addItem(this)"><i class='bx bx-plus nav_icon'></i> </button>
+                                        <!-- data-quantity_input="{{prices.id}}" -->
+                                      <button class="addBtn" id="invoceDownlaod" 
+                                      data-id="{{prices.id}}" 
+                                      data-vehical_type="{{prices.vehical_type}}"
+                                      data-color="{{prices.color}}"  
+                                      data-product_name="{{prices.product_name}}" 
+                                      data-item_desc="{{prices.item_desc}}" 
+                                      data-uom="{{prices.uom}}" 
+                                      data-mrp_incl_gst_pu="{{prices.mrp_incl_gst_pu}}" 
+                                      onclick="addItem(this)"><i class='bx bx-plus nav_icon'></i></button>
                                     </td>
                                      {# <td> #}
                                         {# <button type="button" class="btn btn-link btn-sm"> #}

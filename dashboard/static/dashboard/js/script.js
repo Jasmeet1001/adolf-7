@@ -16,7 +16,7 @@ const billDownload = ()=> {
         window.alert("No items added")
         return;
     }
-
+    
     
     invoice.style.display = "block"
 }
@@ -27,27 +27,40 @@ var descriptions = [];
 var cart = [];
 function addItem(button){
 
-    // { id, vehical_tp, color, product_nm, item_desc, uom }
+    // { id, vehical_tp, color, product_nm, item_desc, uom, mrp_incl_gst_pu }
     const product_info = button.dataset
 
-
+    var productId = product_info.id;
     var vehical_tp = product_info.vehical_type;
     var color = product_info.color;
     var product_nm = product_info.product_name;
     var itemDesc = product_info.item_desc;
     var uom = product_info.uom;
+    var mrpInclGstPu = product_info.mrp_incl_gst_pu;
 
+    var productQuantityInp = document.getElementsByClassName("quantiy-Input")
+    
+    for(var i = 0; i < productQuantityInp.length; i++){
+        if(productQuantityInp[i].classList.contains(productId)){
+           var quantityInputValue = productQuantityInp[i].value
+        }
+    }
 
-    if(!descriptionExists(vehical_tp, product_nm)) {
+    if(!descriptionExists(vehical_tp, product_nm) && quantityInputValue > 0) {
         var counterBill = billStatement.getElementsByTagName("tr").length;
         var counterCart = cartStatement.getElementsByTagName("tr").length;
-        var newRowBill = '<tr><td style="text-align: center; border-right: 1px solid black;">'+ (counterBill+1) +'</td><td style="width: 10px; border-right: 1px solid black;" colspan="3">'+ vehical_tp +'</td><td style="border-right: 1px solid black;" colspan="3">'+ color + '</td><td style="width: 10px; border-right: 1px solid black;" colspan="3">'+ product_nm + '</td><td style="width: 10px; border-right: 1px solid black;" colspan="3">'+ itemDesc + '</td><td style="width: 10px; border-right: 1px solid black;" colspan="3">'+ uom  + '</td><td style="width: 10px; border-right: 1px solid black;">' + 12 + '</td><td style="width: 10px; border-right: 1px solid black;">'+ 123 +'</tr>';
-        var counterCartBill = '<tr><td>' + (counterCart+1) + '</td><td>' + vehical_tp + '</td><td>'+ product_nm + '</td></tr>'
+        var newRowBill = '<tr><td style="text-align: center; border-right: 1px solid black;">'+ (counterBill+1) +'</td><td style="width: 10px; border-right: 1px solid black;" colspan="3">'+ vehical_tp +'</td><td style="border-right: 1px solid black;" colspan="3">'+ color + '</td><td style="width: 10px; border-right: 1px solid black;" colspan="3">'+ product_nm + '</td><td style="width: 10px; border-right: 1px solid black;" colspan="3">'+ itemDesc + '</td><td style="width: 10px; border-right: 1px solid black;" colspan="3">'+ uom  + '</td><td style="width: 10px; border-right: 1px solid black;">' + quantityInputValue + '</td><td style="width: 10px; border-right: 1px solid black;">'+ (quantityInputValue*mrpInclGstPu) +'</tr>';
+        var counterCartBill = '<tr><td>' + (counterCart+1) + '</td><td>' + vehical_tp + '</td><td>'+ product_nm + '</td><td>' + quantityInputValue + '</td><td>'+ (quantityInputValue*mrpInclGstPu) + '</td></tr>'
         billStatement.innerHTML += newRowBill; 
         cartStatement.innerHTML += counterCartBill;
         descriptions.push(product_info);
         cart.push(product_info);
     }
+    else {
+        window.alert("Can't add item with 0 quantity.")
+    }
+
+    
     
 }
 
