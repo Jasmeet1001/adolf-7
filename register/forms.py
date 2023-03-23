@@ -1,8 +1,4 @@
-from django import forms
-from .models import User
+from django.forms import forms
 
-class login_form(forms.ModelForm):
-    password1 = forms.PasswordInput()
-    class Meta:
-        model = User
-        fields = ['phone_number', 'password1']
+# class LoginForm(forms.Form):
+#     phone_num = forms.
