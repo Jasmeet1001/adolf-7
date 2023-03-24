@@ -1,0 +1,120 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block pfp %}
+<img src="{{ user.adolfadmin.photo.url }}" alt="pfp" class="rounded-circle">
+{% endblock pfp %}
+
+
+{% block content %}
+    <div class="l-navbar" id="nav-bar">
+        <nav class="nav">
+            <div> 
+                <a href="{% url 'dashboard-admin' %}" class="nav_logo"> 
+                    <!-- <img src="img/adolf7-automotive-industries-pvt-ltd-only-logo.png" alt=""> -->
+                    <i class='bx bx-child nav_icon' ></i>
+                    Adolf7
+                </a>
+                <div class="nav_list"> 
+                    <a href="{% url 'dashboard-admin' %}" class="nav_link "> 
+                        <i class='bx bx-grid-alt nav_icon'></i> 
+                        <span class="nav_name">Dashboard</span> 
+                    </a>
+                    <a href="{% url 'order-view-admin' %}" class="nav_link active"> 
+                        <i class='bx bx-plus nav_icon'></i> 
+                        <span class="nav_name">New Order</span> 
+                    </a>
+                    <a href="#" class="nav_link"> 
+                        <i class='bx bx-rupee nav_icon'></i> 
+                        <span class="nav_name">Payments</span>
+                    </a> 
+                    <a href="{% url 'admin-createuser' %}" class="nav_link"> 
+                        <i class='bx bx-user-plus'></i>
+                        <span class="nav_name">Create User</span>
+                    </a> 
+                </div>
+            </div> 
+        </nav>
+    </div>
+
+    <div class="d-flex flex-column flex-lg-row">
+        <div class="col-12">
+            <div class="card top-selling overflow-auto">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <h5 class="card-title">
+                            Price List 
+                        </h5>
+                        <div class="search d-flex">
+                            <div class="profile-dropdown">
+                                <a class="nav-link dropdown-toggle text-end w-100" href="#" data-bs-toggle="dropdown"></a>
+                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                    <li class="dropdown-header text-start">
+                                        <h6 class="filter-tag text-center">Filters</h6>
+                                    </li>
+                                    <div class="dropdown-things text-start">
+                                        <li class="form-check">
+                                            <input type="checkbox" name="" id="checkVehicleType">
+                                            <label for="checkVehicleType">Vehicle Type</label>
+                                        </li>
+                                        <li class="form-check">
+                                            <input type="checkbox" name="" id="checkColor">
+                                            <label for="checkColor">Color</label>
+                                        </li>
+                                        <li class="form-check">
+                                            <input type="checkbox" name="" id="checkProductName">
+                                            <label for="checkProductName">Product Name</label>
+                                        </li>
+                                        <li class="form-check">
+                                            <input type="checkbox" name="" id="checkUom">
+                                            <label for="checkUom">UOM</label>
+                                        </li>
+                                    </div>
+                                </ul>
+                            </div>
+                            <form action="" class="d-flex">
+                                <input type="text" placeholder="Search..." required class="form-control searchInput">
+                                <button class="searchBtn"><i class='bx bx-search' ></i></button>
+                            </form>
+                        </div>
+                    </div>
+                    <table class="table table-borderless ">
+                        <thead>
+                            <tr class="table-heading">
+                                <th scope="col">Vehical Type</th>
+                                <th scope="col">Color</th>
+                                <th scope="col">Product Name</th>
+                                <th scope="col">Product Image</th>
+                                <th scope="col">Item Description</th>
+                                <th scope="col">uom</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Edit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for prices in pricelist_obj %}
+                                <tr>
+                                    <td>{{ prices.vehical_type }}</td>
+                                    <td>{{ prices.color }}</td>
+                                    <td>{{ prices.product_name }}</td>
+                                    <td>{{ prices.product_image }}</td>
+                                    <td>{{ prices.item_desc }}</td>
+                                    <td>{{ prices.uom }}</td>
+    
+                                    <td>  
+                                        <input type="text" class="{{prices.id}} quantiy-Input" style="width: 55px;" min="0" value="1">
+                                    </td>
+                                     {# <td> #}
+                                        {# <button type="button" class="btn btn-link btn-sm"> #}
+                                            {# <a href="{% url 'dashboard-edit' prices.id %}">Edit</a> #}
+                                        {# </button> #}
+                                    {# </td> #}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,303 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block pfp %}
+<img src="{{ user.adolfadmin.photo.url }}" alt="pfp" class="rounded-circle">
+{% endblock pfp %}
+
+
+{% block content %}
+    <div class="l-navbar" id="nav-bar">
+        <nav class="nav">
+            <div> 
+                <a href="{% url 'dashboard-retailer' %}" class="nav_logo"> 
+                    <!-- <img src="img/adolf7-automotive-industries-pvt-ltd-only-logo.png" alt=""> -->
+                    <i class='bx bx-child nav_icon' ></i>
+                    Adolf7
+                </a>
+                <div class="nav_list"> 
+                    <a href="{% url 'dashboard-retailer' %}" class="nav_link "> 
+                        <i class='bx bx-grid-alt nav_icon'></i> 
+                        <span class="nav_name">Dashboard</span> 
+                    </a>
+                    <a href="{% url 'order-view-retailer' %}" class="nav_link active"> 
+                        <i class='bx bx-plus nav_icon'></i> 
+                        <span class="nav_name">New Order</span> 
+                    </a>
+                    <a href="#" class="nav_link"> 
+                        <i class='bx bx-rupee nav_icon'></i> 
+                        <span class="nav_name">Payments</span>
+                    </a> 
+                    <!-- <a href="{% url 'admin-createuser' %}" class="nav_link"> 
+                        <i class='bx bx-user-plus'></i>
+                        <span class="nav_name">Create User</span>
+                    </a>  -->
+                </div>
+            </div> 
+        </nav>
+    </div>
+
+    <div class="d-flex flex-column flex-lg-row">
+        <div class="col-lg-8">
+            <div class="card top-selling overflow-auto">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <h5 class="card-title">
+                            Price List 
+                        </h5>
+                        <div class="search d-flex">
+                            <div class="profile-dropdown">
+                                <a class="nav-link dropdown-toggle text-end w-100" href="#" data-bs-toggle="dropdown"></a>
+                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                    <li class="dropdown-header text-start">
+                                        <h6 class="filter-tag text-center">Filters</h6>
+                                    </li>
+                                    <div class="dropdown-things text-start">
+                                        <li class="form-check">
+                                            <input type="checkbox" name="" id="checkVehicleType">
+                                            <label for="checkVehicleType">Vehicle Type</label>
+                                        </li>
+                                        <li class="form-check">
+                                            <input type="checkbox" name="" id="checkColor">
+                                            <label for="checkColor">Color</label>
+                                        </li>
+                                        <li class="form-check">
+                                            <input type="checkbox" name="" id="checkProductName">
+                                            <label for="checkProductName">Product Name</label>
+                                        </li>
+                                        <li class="form-check">
+                                            <input type="checkbox" name="" id="checkUom">
+                                            <label for="checkUom">UOM</label>
+                                        </li>
+                                    </div>
+                                </ul>
+                            </div>
+                            <form action="" class="d-flex">
+                                <input type="text" placeholder="Search..." required class="form-control searchInput">
+                                <button class="searchBtn"><i class='bx bx-search' ></i></button>
+                            </form>
+                        </div>
+                    </div>
+                    <table class="table table-borderless ">
+                        <thead>
+                            <tr class="table-heading">
+                                <th scope="col">Vehical Type</th>
+                                <th scope="col">Color</th>
+                                <th scope="col">Product Name</th>
+                                <th scope="col">Product Image</th>
+                                <th scope="col">Item Description</th>
+                                <th scope="col">uom</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Add To Cart</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for prices in pricelist_obj %}
+                                <tr>
+                                    <td>{{ prices.vehical_type }}</td>
+                                    <td>{{ prices.color }}</td>
+                                    <td>{{ prices.product_name }}</td>
+                                    <td>{{ prices.product_image }}</td>
+                                    <td>{{ prices.item_desc }}</td>
+                                    <td>{{ prices.uom }}</td>
+    
+                                    <td>  
+                                        <input type="text" class="{{prices.id}} quantiy-Input" style="width: 55px;" min="0" value="1">
+                                </td>
+                                    <td>
+                                        <!-- data-quantity_input="{{prices.id}}" -->
+                                      <button class="addBtn" id="invoceDownlaod" 
+                                      data-id="{{prices.id}}" 
+                                      data-vehical_type="{{prices.vehical_type}}"
+                                      data-color="{{prices.color}}"  
+                                      data-product_name="{{prices.product_name}}" 
+                                      data-item_desc="{{prices.item_desc}}" 
+                                      data-uom="{{prices.uom}}" 
+                                      data-mrp_incl_gst_pu="{{prices.mrp_incl_gst_pu}}" 
+                                      onclick="addItem(this)"><i class='bx bx-plus nav_icon'></i></button>
+                                    </td>
+                                     {# <td> #}
+                                        {# <button type="button" class="btn btn-link btn-sm"> #}
+                                            {# <a href="{% url 'dashboard-edit' prices.id %}">Edit</a> #}
+                                        {# </button> #}
+                                    {# </td> #}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-4 marginLeft">
+            <div class="card top-selling overflow-auto">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <h5 class="card-title">
+                            Cart 
+                        </h5>
+                    </div>
+                    <table class="table table-borderless ">
+                        <thead>
+                            <tr class="table-heading">
+                                <th scope="col">S.N.</th>
+                                <th scope="col">Vehical Type</th>
+                                <th scope="col">Product Name</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cartStatement">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="cart-btns">
+                <button class="removeBtn" id="invoceDownlaod" onclick="removeItem(descriptions, cart)">Remove</button>
+                <button class="removeBtn" id="invoceDownlaod" onclick="reset()">Clear</button>
+                <button class="removeBtn" id="invoceDownlaod" onclick="billDownload()">Download PDF</button>
+            </div>
+        </div>
+    </div>
+    <div class="sheet" style="width: 80em;" id="invoice" >
+        <div class="box-body">
+            <div class="heading-wrapper">
+                <div class="row">
+                    <div style="padding-left: 20px; padding-top: 16px;">
+                        <h4 style="text-decoration: underline;">Purchase Order</h4>
+                    </div>
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <div class="logo">
+                            <img src="{% static 'dashboard/img/adolf7-automotive-industries-pvt-ltd-logo.png' %}" width="500px" alt="">
+                        </div>
+                        <div style="padding-left: 16px; padding-top: 10px;">
+                            <p>G/F, Plot at KH No.107/4, Village Mundka, Pole No. MDK, Near Narayan Dharm</p>
+                            <p style="text-align: center;">Kata, New Delhi, West Delhi, Pincode: 110041</p>
+                            <p style="text-align: center;">GSTIN : 07AAPCA6073P1ZX</p>
+                            <p style="text-align: center;">Tel.: +91-9718914172 &nbsp;&nbsp; Email: customercare@adolf7.com</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="date-wrapper">
+                    <table border="1" style="width:10%;">
+                        <tr style="background: rgba(217,225,242,1.0);">
+                            <td style="font-size: 14px; font-weight: 600;" width="100px">
+                                Date & TIme
+                            </td>
+                            <td style="border-left: 1px solid black; font-size: 14px; font-weight: 600;">
+                                ORDER NO
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 12px;" id="date-time"></td>
+                            <!-- Update the order as per data -->
+                            <td style="font-size: 12px; border-left: 1px solid black; text-align: center;">1</td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                <table width="100%" border="1">
+                    <!-- Buyer Section -->
+                    <tr style="background: rgba(217,225,242,1.0)">
+                        <th colspan="2" style="width: 25%; border-bottom: 1px solid black;">Bill To</th>
+                    </tr>
+                    <tr style="border-bottom: 1px solid black;">
+                        <th class="infoBillTo" >Buyer Name</th>
+                        <th class="infoBillToValue">{{request.user.first_name}} {{request.user.last_name}}</th>
+                    </tr>
+                    <tr style="border-bottom: 1px solid black;">
+                        <th class="infoBillTo" >Buyer Address</th>
+                        <th class="infoBillToValue">{{request.user.address}} {{request.user.address}}</th> 
+                    </tr>
+                    <tr style="border-bottom: 1px solid black;">
+                        <th class="infoBillTo" >Buyer Number</th>
+                        <th class="infoBillToValue">{{request.user.address}} {{request.user.address}}</th> 
+                    </tr>
+                    <!-- Seller Section -->
+                    <tr style="border-bottom: 1px solid black;">
+                        <th class="infoBillTo" >Seller Name</th>
+                        <th class="infoBillToValue"></th> 
+                    </tr>
+                    <tr style="border-bottom: 1px solid black;">
+                        <th class="infoBillTo" >Seller Address</th>
+                        <th class="infoBillToValue"></th> 
+                    </tr>
+                    <tr style="border-bottom: 1px solid black;">
+                        <th class="infoBillTo" >Seller Number</th>
+                        <th class="infoBillToValue"></th> 
+                    </tr>
+                </table>
+                <p>We are pleased to place the order for the following items :</p>
+                <table width="100%" border="1px">
+                    <tr style="background: rgba(217,225,242,1.0);">
+                        <th class="text-center" style="border-right: 1px solid black;">
+                            S.N.
+                        </th>
+                        <th class="text-center" colspan="3" style="border-right: 1px solid black;">
+                            Vehical Type
+                        </th>
+                        <th class="text-center" colspan="3" style="border-right: 1px solid black;">
+                            Color
+                        </th>
+                        <th class="text-center" colspan="3" style="border-right: 1px solid black;">
+                            Product Name
+                        </th>
+                        <th class="text-center" colspan="3" style="border-right: 1px solid black;">
+                            Item Description
+                        </th>
+                        <th class="text-center" colspan="3" style="border-right: 1px solid black;">
+                            UOM
+                        </th>
+                        <!-- <th class="text-center">
+                            Price
+                        </th> -->
+                        <th class="text-center" style="border-right: 1px solid black;">
+                            Quantity
+                        </th>
+                        <th class="text-center">
+                            Amount
+                        </th>
+                    </tr>
+                    <tbody id="billStatement" style="border: 1px solid black;">
+                        <!-- <tr></tr> -->
+                            <!-- <tr>
+                                <td style="text-align: center; border-right: 1px solid black;">1</td>
+                                <td style="width: 10px; border-right: 1px solid black;" colspan="3">vehical_type</td>
+                                <td style="width: 10px; border-right: 1px solid black;" colspan="3">Color</td>
+                                <td style="width: 10px; border-right: 1px solid black;" colspan="3">prodcut name</td>
+                                <td style="width: 10px; border-right: 1px solid black;" colspan="3">item desc</td>
+                                <td style="width: 10px; border-right: 1px solid black;" colspan="3">Uom</td>
+                                <td style="border-right: 1px solid black;">23</td>
+                                <td>31231</td>
+                            </tr> -->
+                    </tbody>
+                    <tfoot id="billStatementAmount">
+                        <!-- <tr style="background: rgba(217,225,242,1.0); border-bottom: 1px solid black;">
+                            <td colspan="13" style="border-right: 1px solid black;">Total Amount</td>
+                            <td colspan="5" style="text-align: center;">sfd</td>
+                        </tr> -->
+                        <!-- <tr style="background: rgba(217,225,242,1.0); border-bottom: 1px solid black;">
+                            <td colspan="13" style="border-right: 1px solid black;">GST</td>
+                            <td colspan="5" style="text-align: center;">18%</td>
+                        </tr>
+                        <tr style="background: rgba(217,225,242,1.0);">
+                            <td colspan="13" style="border-right: 1px solid black;">GST</td>
+                            <td colspan="5" style="text-align: center;">18%</td>
+                        </tr> -->
+                    </tfoot>
+                </table>
+                <br>
+                <table width="94%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="65%" align="center" valign="top">
+                            <h6>If you have any query about this invoice, please contact us at <br> Tel.: +91-9718914172 &nbsp;&nbsp; Email: customercare@adolf7.com</h6>
+                        </td>
+                        <td width="16%" valign="top">
+                            <h6 class="text-center" style=" border-top: 1px solid black; margin-top: 10px; padding-top: 12px;">Signature and Seal</h6>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'dashboard/js/script.js' %}"></script>
+{% endblock %}
