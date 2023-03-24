@@ -16,7 +16,7 @@ def login_check(request):
                 if AdolfAdmin.objects.filter(user=user).exists():
                     return redirect('dashboard-admin')
                 elif Distributer.objects.filter(user=user).exists():
-                    return redirect('dashboard-distributer')
+                    return redirect('dashboard-distributor')
                 elif Retailer.objects.filter(user=user).exists():
                     return redirect('dashboard-retailer')
             else:
