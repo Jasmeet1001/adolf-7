@@ -6,7 +6,6 @@ from PIL import Image
 class CommonInfo(models.Model):
     user = models.OneToOneField(User, on_delete=models.PROTECT)
     photo = models.FileField(default='default.jpg', upload_to='profile_pics')
-    # user_type = models.CharField(max_length=20)
     
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -22,28 +21,25 @@ class CommonInfo(models.Model):
         abstract = True
 
 class AdolfAdmin(CommonInfo):
-    company_address = models.CharField(max_length=255, blank=True)
-
     def __str__(self):
         return f"Adolf7 Admin: {self.user.first_name} {self.user.last_name}, {self.user.phone_number}"
 
 class Distributer(CommonInfo):
     adolfAdmin = models.ForeignKey(AdolfAdmin, on_delete=models.PROTECT, related_name='distributers')
-    location = models.CharField(max_length=255)
-    company_name = models.CharField(max_length=255)
-    company_address = models.CharField(max_length=255)
+    location_dist = models.CharField(max_length=255, blank=True)
+    company_name_dist = models.CharField(max_length=255, blank=True)
+    company_address_dist = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
-        return f"{self.user.first_name} {self.user.last_name}, {self.user.phone_number}, {self.company_name}, {self.company_address}"
+        return f"{self.user.first_name} {self.user.last_name}, {self.user.phone_number}, {self.company_name_dist}, {self.company_address_dist}"
 
 class Retailer(CommonInfo):
     distributer = models.ForeignKey(Distributer, on_delete=models.PROTECT, related_name='retailers')
-    location = models.CharField(max_length=255)
-    shop_name = models.CharField(max_length=255)
-    shop_address = models.CharField(max_length=255)
-
+    location_ret = models.CharField(max_length=255, blank=True)
+    company_name_ret = models.CharField(max_length=255, blank=True)
+    company_address_ret = models.CharField(max_length=255, blank=True)
     def __str__(self):
-        return f"{self.user.first_name} {self.user.last_name}, {self.user.phone_number}, {self.shop_name}, {self.shop_address}"
+        return f"{self.user.first_name} {self.user.last_name}, {self.user.phone_number}, {self.company_name_ret}, {self.company_address_ret}"
 
 class PriceList(models.Model):
     vehical_type = models.CharField(max_length=255, null=True)
@@ -63,17 +59,21 @@ class PriceList(models.Model):
     def __str__(self):
         return f"{self.vehical_type} {self.color} {self.product_name} - {self.mrp_incl_gst_pu}"
 
-# class Restock(models.Model):
-#     pass
+class OrderDist(models.Model):
+    distributer = models.ForeignKey(Distributer, on_delete=models.DO_NOTHING)
+    product = models.ForeignKey(PriceList, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField()
+    date_ordered = models.DateTimeField(auto_now_add=True)
+    complete = models.BooleanField(default=False)
 
-# class Order(models.Model):
-#     distributer = models.ForeignKey(Distributer, on_delete=models.DO_NOTHING)
-#     retailer = models.ForeignKey(Retailer, on_delete=models.DO_NOTHING)
-#     date_ordered = models.DateTimeField(auto_now_add=True)
-#     complete = models.BooleanField(default=False)
+    def __str__(self):
+        return f"{self.distributer.user.first_name} {self.distributer.user.last_name} {self.product.vehical_type} {self.product.color} {self.product.product_name} {self.quantity}"
 
-#     def __str__(self):
-#         return str(self.id) #type:ignore
+class OrderRet(models.Model):
+    order_dist = models.ForeignKey(OrderDist, on_delete=models.CASCADE, related_name='retailer_orders')
+    retailer = models.ForeignKey(Retailer, on_delete=models.DO_NOTHING)
+    quantity = models.PositiveIntegerField()
+    date_ordered = models.DateTimeField(auto_now_add=True)
 
-# class OrderItem(models.Model):
-#     pass
+    def __str__(self):
+        return f"{self.retailer.user.first_name} {self.retailer.user.last_name} {self.order_dist.product.vehical_type} {self.order_dist.product.color} {self.order_dist.product.product_name} {self.quantity}"
