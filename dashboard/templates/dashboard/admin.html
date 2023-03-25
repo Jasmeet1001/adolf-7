@@ -97,9 +97,9 @@
                             </th>
                             <td>{{ dist.user.first_name }} {{ dist.user.last_name }}</td>
                             <td >
-                                <a href="" class="text-primary recent-t">{{ dist.company_name }}</a>
+                                <a href="" class="text-primary recent-t">{{ dist.company_name_dist }}</a>
                             </td>
-                            <td>{{ dist.company_address }}</td>
+                            <td>{{ dist.company_address_dist }}</td>
                             <td>No. of Orders Placed</td>
                             <td>
                                 <span class="badge bg-success">Approved</span>
@@ -112,6 +112,74 @@
             </div>
         </div>
         <!-- Recent Transitions Ends -->
+
+        <div class="col-12">
+            <div class="card recent-sales overflow-auto">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <h5 class="card-title">
+                        Retailers
+                        <!-- Recent Transtions 
+                        <span>| 
+                            <span class="filter-tag">{{request.user.first_name}} {{request.user.last_name}}</span>
+                        </span> -->
+                    </h5>
+                    <!-- <div class="filter">
+                        <a class="icon" href="#" data-bs-toggle="dropdown">
+                            <i class='bx bx-dots-horizontal-rounded px-2'></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                            <li class="dropdown-header text-start">
+                                <h6>Filter</h6>
+                            </li>
+                            <div class="dropdown-things">
+                                <li>
+                                    <a class="dropdown-item" href="#">Today</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">This Month</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">This Year</a>
+                                </li>
+                            </div>
+                        </ul>
+                    </div>
+                </div> -->
+
+                <table class="table table-borderless ">
+                    <thead>
+                        <tr class="table-heading">
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Company Name</th>
+                            <th scope="col">Company Address</th>
+                            <th scope="col">Orders Placed</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for ret in ret_obj %}
+                        <tr>
+                            <th scope="row">
+                                <a href="#">#{{ ret.id }}</a>
+                            </th>
+                            <td>{{ ret.user.first_name }} {{ ret.user.last_name }}</td>
+                            <td >
+                                <a href="" class="text-primary recent-t">{{ ret.company_name_ret }}</a>
+                            </td>
+                            <td>{{ ret.company_address_ret }}</td>
+                            <td>No. of Orders Placed</td>
+                            <td>
+                                <span class="badge bg-success">Approved</span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
 
         <!-- Recent Activity Starts -->
         <div class="col-12">
