@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.paginator import Paginator
 from django.contrib import messages
-from django.contrib.auth.forms import UserCreationForm
 
 from .forms import UserRole, NewDist, NewRet, NewAdmin, UserCreation
 from .models import PriceList, AdolfAdmin, Distributer, Retailer
@@ -99,8 +98,13 @@ def create_new_user(request):
 def admin_page(request):
     distributers_all = request.user.adolfadmin.distributers.all()
 
+    retailers_all = []
+    for distributer in distributers_all:
+        retailers_all.extend(distributer.retailers.all())
+
     context = {
-        'dist_obj': distributers_all
+        'dist_obj': distributers_all,
+        'ret_obj': retailers_all,
     }
 
     return render(request, 'dashboard/admin.html', context)
