@@ -442,8 +442,8 @@ form .fields .input-field{
 }
 
 
-#id_phNum,
-#id_password {
+#id_pass,
+#id_pass {
     border: none !important;
     border-bottom: 2px solid #004CFF !important;    
     border-radius: 0 !important;
@@ -451,8 +451,8 @@ form .fields .input-field{
     box-shadow: none !important;
 }
 
-#id_password:focus, 
-#id_password:valid,
+#id_pass:focus, 
+#id_pass:valid,
 #id_phNum:focus, 
 #id_phNum:valid 
 {
