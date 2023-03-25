@@ -28,6 +28,11 @@ class NewAdmin(forms.ModelForm):
     class Meta:
         model = AdolfAdmin
         exclude = ['user', 'photo']
+    
+    class Media:
+        css = (
+            'dashboard/css/styleNewUser.css'
+        )
 
 class NewDist(forms.ModelForm):
     class Meta:

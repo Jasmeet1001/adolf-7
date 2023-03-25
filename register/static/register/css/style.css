@@ -65,8 +65,6 @@
 
 
 .logout-page {
-    background-color: #fff;
-    box-shadow: 18px 18px 47px -18px rgba(0,0,0,0.75) !important;
     width: 500px;
     border-radius: 5px;
 }
@@ -114,9 +112,20 @@
     }
 }
 
+.login-header {
+    padding-bottom: 20px;
+    border-bottom: 1px solid black;
+}
 
-#id_phNum,
-#id_password {
+.labelForm {
+    padding-top: 10px;
+}
+
+.login-form-section {
+    text-align: left;
+}
+
+.id_phNum {
     border: none !important;
     border-bottom: 2px solid #004CFF !important;    
     border-radius: 0 !important;
@@ -124,10 +133,8 @@
     box-shadow: none !important;
 }
 
-#id_password:focus, 
-#id_password:valid,
-#id_phNum:focus, 
-#id_phNum:valid 
+.id_phNum:focus, 
+.id_phNum:valid
 {
     transition: border 250ms ease-in-out;
     border-bottom: 2px solid #ee3131 !important;
