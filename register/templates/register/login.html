@@ -1,50 +1,44 @@
 {% extends 'register/base.html' %}
 {% load static %}
 {% block main %}
-<body>
-    <div class="login-wrapper-main" style="background-image: url('{% static 'register/img/abstract bg.png' %}');">
-        <div class="login-section-wrapper" >
-            <div class="min-img img-hidden">
-                <img class="login-section-heading mb-4" src="{% static 'register/img/adolf7-automotive-industries-pvt-ltd-logo.png' %}" style="width: 300px;" alt="Adolf7-Automotive-Industries-Pvt.-Ltd.-Logo" >
-            </div>
-            <div class="big-img img-hidden">
-                <img class="login-section-heading mb-4 " src="{% static 'register/img/adolf7-automotive-industries-pvt-ltd-logo.png' %}" alt="Adolf7-Automotive-Industries-Pvt.-Ltd.-Logo" >
-            </div>
-            <div class=" text-center form-wrapper ">
-                
-                <div class="login-form-section">
-                    {% if messages %}
-                        {% for message in messages %}
-                            {% if message.tags == 'error' %}
-                                <div class="alert alert-danger" role="alert">
-                                    {{ message }}
-                                </div>
-                            {% else %}
-                                <div class="alert alert-{{ message.tags }}" role="alert">
-                                    {{ message }}
-                                </div>
-                            {% endif %}
-                        {% endfor %}
-                    {% endif %}
-                    <form method="POST" class="bg-white p-5 login-form w-100">
-                        {% csrf_token %}
-                        <h3 class=" fs-4 mb-2 ">Login</h3>
-                        <div class=" mb-3 mt-4 user-value">                      
-                            <div class=" mb-3 mt-4">
-                                <div class="form-floating mb-3">
-                                    <input type="tel" class="form-control" placeholder="Enter the Phone Number" name="phone_number" id="id_phNum" required>
-                                    <label for="id_phNum" class="label_phNum">Phone Number</label>
-                                </div>
-                                <div class="form-floating">
-                                    <input type="password" class="form-control" placeholder="Enter the Password" id="id_password" name="password" required>
-                                    <label for="id_password" class="label_password">Password</label>
-                                </div>                            
+<div class="login-wrapper-main" style="background-image: url('{% static 'register/img/abstract bg.png' %}');">
+    <div class="login-section-wrapper" >
+        <div class="min-img img-hidden">
+            <img class="login-section-heading mb-4" src="{% static 'register/img/adolf7-automotive-industries-pvt-ltd-logo.png' %}" style="width: 300px;" alt="Adolf7-Automotive-Industries-Pvt.-Ltd.-Logo" >
+        </div>
+        <div class="big-img img-hidden">
+            <img class="login-section-heading mb-4 " src="{% static 'register/img/adolf7-automotive-industries-pvt-ltd-logo.png' %}" alt="Adolf7-Automotive-Industries-Pvt.-Ltd.-Logo" >
+        </div>
+        <div class=" text-center form-wrapper ">
+            
+            <div>
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.tags == 'error' %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ message }}
                             </div>
-                        <button type="submit" class="btn btn-primary submit-btn w-100 my-4 text-uppercase fw-bold">Continue</button>
-                    </form>                        
-                </div>
+                        {% else %}
+                            <div class="alert alert-{{ message.tags }}" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                <form method="POST" class="bg-white p-5 login-form w-100">
+                    {% csrf_token %}
+                    <h3 class=" fs-4 mb-2 login-header">Login</h3>
+                    <div class="login-form-section">
+                        {% for field in formLogin %}
+                            <label for="id_{{field.name}}" class="labelForm">{{field.label}}</label>
+                            {{ field }}
+                        {% endfor %}
+                        </div>
+                    <button type="submit" class="btn btn-primary submit-btn w-100 my-4 text-uppercase fw-bold">Continue</button>
+                </form>                        
             </div>
         </div>
-    </div>    
+    </div>
+</div>    
 {% endblock main %}
 

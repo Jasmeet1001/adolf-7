@@ -5,17 +5,24 @@
 }
 
 
-.login-wrapper-main {
+.login-wrapper-main{
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 100vh;
-    background-color: #f6f9ff ;
+    background-color: #f6f9ff;
     background-size: 80%;
     background-position: center;
     background-repeat: no-repeat; 
 }
 
+.logout-wrapper-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    background-color: #f6f9ff;
+}
 
 .login-section-wrapper {
     display: flex;
@@ -57,9 +64,21 @@
 }
 
 
+.logout-page {
+    width: 500px;
+    border-radius: 5px;
+}
+
+.logout-page h3 {
+    font-size: 24px;
+
+}
+.login-again-btn {
+    font-size: 16px;
+}
+
 .login-form h3 {
     color: black;
-    
 }
 
 @media (max-width: 330px) {
@@ -68,6 +87,7 @@
     .label_password {
         font-size: 14px;
     }
+    
 }
 
 @media (max-width:500px) {
@@ -81,11 +101,31 @@
         padding-left: 0px;
         /* border: 1px solid black; */
     }
+    .logout-page {
+        width: 200px;
+    }
+    .login-again-btn {
+        font-size: 10px;
+    }
+    .logout-page h3 {
+        font-size: 12px;
+    }
 }
 
+.login-header {
+    padding-bottom: 20px;
+    border-bottom: 1px solid black;
+}
 
-#id_phNum,
-#id_password {
+.labelForm {
+    padding-top: 10px;
+}
+
+.login-form-section {
+    text-align: left;
+}
+
+.id_phNum {
     border: none !important;
     border-bottom: 2px solid #004CFF !important;    
     border-radius: 0 !important;
@@ -93,10 +133,8 @@
     box-shadow: none !important;
 }
 
-#id_password:focus, 
-#id_password:valid,
-#id_phNum:focus, 
-#id_phNum:valid 
+.id_phNum:focus, 
+.id_phNum:valid
 {
     transition: border 250ms ease-in-out;
     border-bottom: 2px solid #ee3131 !important;

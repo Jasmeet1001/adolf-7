@@ -1,7 +1,22 @@
 {% extends 'register/base.html' %}
+{% load static %}
 {% block main %}
-<h1>Logged Out</h1>
-<a href="{% url 'login_view' %}"><button type="submit">
-    Login
-</button></a>
+<div class="logout-wrapper-main" >
+    <div class="login-section-wrapper" >
+        <div class="min-img img-hidden">
+            <img class="login-section-heading mb-4" src="{% static 'register/img/adolf7-automotive-industries-pvt-ltd-logo.png' %}" style="width: 300px;" alt="Adolf7-Automotive-Industries-Pvt.-Ltd.-Logo" >
+        </div>
+        <div class="big-img img-hidden">
+            <img class="login-section-heading mb-4 " src="{% static 'register/img/adolf7-automotive-industries-pvt-ltd-logo.png' %}" alt="Adolf7-Automotive-Industries-Pvt.-Ltd.-Logo" >
+        </div>
+        <div class=" text-center logout-wrapper ">
+            <div class="logout-page p-2">
+                <h3 class="mb-2 mt-4">You have been Loged Out</h3>
+                <a href="{% url 'login-view' %}">
+                    <button type="submit" class="btn btn-primary submit-btn login-again-btn w-50 my-4 text-uppercase fw-bold">Login Again</button>
+                </a>            
+            </div>
+        </div>
+    </div>
+</div>  
 {% endblock main %}

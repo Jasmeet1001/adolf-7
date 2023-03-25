@@ -110,18 +110,44 @@ def admin_page(request):
     return render(request, 'dashboard/admin.html', context)
 
 @login_required
-def pricelist_view(request):
-    pricelist_all = PriceList.objects.all()
-
+def order_view_admin(request):
+    pricelist_all = PriceList.objects.filter(id__lt=190)
+    # pricelist_all = PriceList.objects.all()
+    
     context = {
-        'pricelist_obj': pricelist_all
+        'pricelist_obj': pricelist_all,
     }
 
-    return render(request, 'dashboard/pricelist.html', context)
+    return render(request, 'dashboard/neworderAdmin.html', context)
+
+
+@login_required
+def order_view_distributor(request):
+    pricelist_all = PriceList.objects.filter(id__lt=190)
+    # pricelist_all = PriceList.objects.all()
+
+    context = {    
+        'pricelist_obj': pricelist_all,
+    }
+
+
+    return render(request, 'dashboard/neworderDistributor.html', context)
+
+@login_required
+def order_view_retailer(request):
+    pricelist_all = PriceList.objects.filter(id__lt=190)
+    # pricelist_all = PriceList.objects.all()
+
+    context = {    
+        'pricelist_obj': pricelist_all,
+    }
+
+
+    return render(request, 'dashboard/neworderRetailer.html', context)
 
 @login_required
 @user_passes_test(is_distributer)
-def distributer_page(request):
+def distributor_page(request):
     return render(request, 'dashboard/distributer.html')
 
 @login_required

@@ -1,38 +1,81 @@
 {% extends 'dashboard/base.html' %}
 {% load static %}
 
+{% block pfp %}
+<img src="{{ user.adolfadmin.photo.url }}" alt="pfp" class="rounded-circle">
+{% endblock pfp %}
+
+
 {% block content %}
+    <div class="l-navbar" id="nav-bar">
+        <nav class="nav">
+            <div> 
+                <a href="{% url 'dashboard-admin' %}" class="nav_logo"> 
+                    <!-- <img src="img/adolf7-automotive-industries-pvt-ltd-only-logo.png" alt=""> -->
+                    <i class='bx bx-child nav_icon' ></i>
+                    Adolf7
+                </a>
+                <div class="nav_list"> 
+                    <a href="{% url 'dashboard-admin' %}" class="nav_link "> 
+                        <i class='bx bx-grid-alt nav_icon'></i> 
+                        <span class="nav_name">Dashboard</span> 
+                    </a>
+                    <a href="{% url 'order-view-admin' %}" class="nav_link "> 
+                        <i class='bx bx-plus nav_icon'></i> 
+                        <span class="nav_name">New Order</span> 
+                    </a>
+                    <a href="#" class="nav_link"> 
+                        <i class='bx bx-rupee nav_icon'></i> 
+                        <span class="nav_name">Payments</span>
+                    </a> 
+                    <a href="{% url 'admin-createuser' %}" class="nav_link active"> 
+                        <i class='bx bx-user-plus'></i>
+                        <span class="nav_name">Create User</span>
+                    </a> 
+                </div>
+            </div> 
+        </nav>
+    </div>
+    <div class="main-wrapper pt-2">
 
-<h1>Add User</h1>
-{% for message in messages %}
-    {% if message.tags == 'error' %}
-        <div class="alert alert-danger">
-            {{ message }}
+        <h4>Add User</h4>
+        <div class="col-12">
+            <div class="card top-selling overflow-auto">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        {% for message in messages %}
+                            {% if message.tags == 'error' %}
+                                <div class="alert alert-danger">
+                                    {{ message }}
+                                </div>
+                            {% else %}
+                                <div class="alert alert-{{ message.tags }}">
+                                    {{ message }}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                        <form method="post" id="order-form">
+                            {% csrf_token %}
+                            {{ role_form.as_p }}
+                            {{ user_form.as_p }}
+                        
+                            <div id="admin-form" style="display: none;">
+                                {{ admin_form.as_p }}
+                            </div>
+                        
+                            <div id="distributor-form" style="display: show;">
+                                {{ dist_form.as_p }}
+                            </div>
+                        
+                            <div id="retailer-form" style="display: none;">
+                                {{ ret_form.as_p }}
+                            </div>
+                            <button type="submit" class="btn btn-primary">Create User</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-    {% else %}
-        <div class="alert alert-{{ message.tags }}">
-            {{ message }}
-        </div>
-    {% endif %}
-{% endfor %}
-  <form method="post" id="order-form">
-    {% csrf_token %}
-    {{ role_form.as_p }}
-    {{ user_form.as_p }}
-
-    <div id="admin-form" style="display: none;">
-        {{ admin_form.as_p }}
+        <script src="{% static 'dashboard/js/showform.js' %}"></script>
     </div>
-
-    <div id="distributor-form" style="display: show;">
-        {{ dist_form.as_p }}
-    </div>
-
-    <div id="retailer-form" style="display: none;">
-        {{ ret_form.as_p }}
-    </div>
-
-    <button type="submit" class="btn btn-primary">Create User</button>
-  </form>
-  <script src="{% static 'dashboard/js/showform.js' %}"></script>
 {% endblock %}
