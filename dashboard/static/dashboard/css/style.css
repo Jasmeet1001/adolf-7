@@ -162,7 +162,6 @@ a {
 
 h6 {
 	color: #4154f1;
-	border-bottom: 1px solid black;
 	padding-bottom: 10px;
 } 
 
@@ -254,6 +253,233 @@ h6 {
 .recent-t {
 	cursor: default;
 }
+
+.addBtn,
+.removeBtn,
+.filterBtn,
+.searchBtn {
+	border: none;
+	background: transparent;
+}
+.addBtn:hover {
+    border-bottom: 2px solid #004CFF ;
+}
+
+.removeBtn:hover {
+    border-bottom: 2px solid #ee3131 ;
+
+}
+
+.marginLeft {
+	margin-left: 10px;
+}
+
+@media (max-width:989px) {
+	.marginLeft {
+		margin-left: 0;
+	}
+}
+
+.search { 
+	padding-bottom: 10px;
+}
+
+.search input::placeholder {
+	font-size: 16px;
+}
+
+.form-check {
+	display: flex;
+	align-items: center;
+	font-size: 14px;
+}
+.form-check label {
+	padding-left: 10px;
+}
+
+@media (max-width: 430px) {
+	.search input::placeholder {
+		font-size: 12px;
+	}
+	.search { 
+		width: 150px;
+	}		
+}
+
+.searchInput {
+	border: none !important;
+    border-bottom: 2px solid #004CFF !important;    
+    border-radius: 0 !important;
+    border-radius: 5px !important;
+    box-shadow: none !important;
+	padding-bottom: 2px;
+	padding-top: 0;
+	
+}
+
+
+
+.searchInput:valid,
+.searchInput:focus {
+    border-bottom: 2px solid #ee3131 !important;    
+}
+
+
+
+/* Invoice CSS */
+
+.sheet {
+    display: none;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+    page-break-after: always;
+    width: 80%;
+    border: 1px solid black;
+}
+
+.box-body {
+    display: flex;
+    padding: 5px 10px 0 10px;
+    margin-bottom: -21px;
+}
+
+.heading-wrapper {
+    width: 100%;
+    padding-right: 10px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.row h5 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    margin-top: 45px;
+}
+
+.row p {
+    font-size: 12px;
+    margin: 0;
+    margin-bottom: 3px;
+    padding: 0;
+}
+
+.date-wrapper {
+    display: flex;
+    margin-top: -52px;
+}
+
+.infoBillTo {
+    width: 5%;
+    font-size: 12px;
+    background: rgba(217,225,242,1.0);
+    padding: 16px;
+}
+
+.infoBillToValue {
+    font-size: 12px;
+    padding: 16px;
+    text-align: left;
+    /* background: rgba(217,225,242,1.0) !important; */
+}
+
+table tbody tr td {
+    /* border-top: 1px dashed #d9d9d8; */
+    line-height: 1.5;
+    padding: 8px;
+    vertical-align: top
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.container{
+    position: relative;
+    max-width: 900px;
+    width: 100%;
+    border-radius: 6px;
+    padding: 30px;
+    margin: 0 15px;
+    background-color: #fff;
+}
+
+.container form{
+    position: relative;
+    margin-top: 16px;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+form .fields .input-field{
+    display: flex;
+    width: calc(100% / 3 - 15px);
+    flex-direction: column;
+    margin: 4px 0;
+}
+
+.input-field label{
+    font-size: 12px;
+    font-weight: 500;
+    color: #2e2e2e;
+}
+
+.input-field input{
+    outline: none;
+    font-size: 14px;
+    font-weight: 400;
+    color: #333;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    padding: 0 15px;
+    height: 42px;
+    margin: 8px 0;
+}
+
+
+#id_phNum,
+#id_password {
+    border: none !important;
+    border-bottom: 2px solid #004CFF !important;    
+    border-radius: 0 !important;
+    border-radius: 5px !important;
+    box-shadow: none !important;
+}
+
+#id_password:focus, 
+#id_password:valid,
+#id_phNum:focus, 
+#id_phNum:valid 
+{
+    transition: border 250ms ease-in-out;
+    border-bottom: 2px solid #ee3131 !important;
+}
+
+
+
+
+@media (max-width: 750px) {
+    .container form{
+        overflow-y: scroll;
+    }
+
+    form .fields .input-field{
+        width: calc(100% / 2 - 15px);
+    }
+}
+
+@media (max-width: 550px) {
+    form .fields .input-field{
+        width: 100%;
+    }
+}
+
+  
 
 @media (min-width: 768px) {
 	body {
