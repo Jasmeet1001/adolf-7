@@ -40,9 +40,9 @@
 
         <h4>Add User</h4>
         <div class="col-12">
-            <div class="card top-selling overflow-auto">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
+            <div class="card overflow-auto">
+                <div class="card-body demo-wrapper">
+                    <div class="d-flex justify-content-between ">
                         {% for message in messages %}
                             {% if message.tags == 'error' %}
                                 <div class="alert alert-danger">
@@ -54,11 +54,14 @@
                                 </div>
                             {% endif %}
                         {% endfor %}
-                        <form method="post" id="order-form">
+                        <form method="post" id="order-form" class="demo">
                             {% csrf_token %}
-                            {{ role_form.as_p }}
-                            {{ user_form.as_p }}
-                        
+                            <div class="choicesOptions">
+                                {{ role_form.as_p }}
+                            </div>
+                            <div class="userDetails">
+                                {{ user_form.as_p }}
+                            </div>
                             <div id="admin-form" style="display: none;">
                                 {{ admin_form.as_p }}
                             </div>
@@ -70,7 +73,7 @@
                             <div id="retailer-form" style="display: none;">
                                 {{ ret_form.as_p }}
                             </div>
-                            <button type="submit" class="btn btn-primary">Create User</button>
+                            <button type="submit" class="btn btn-primary create-user-btn">Create User</button>
                         </form>
                     </div>
                 </div>
