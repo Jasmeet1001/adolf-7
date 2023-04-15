@@ -1,6 +1,12 @@
-#id_choices {
-    border: 1px solid black;
+.choicesOptions p,
+.userDetails p,
+#distributor-form p,
+#admin-form p,
+#retailer-form p {
+    display: flex;
+    flex-direction: column;
 }
-#id_password {
-    
+
+.create-user-btn {
+    width: 150px;
 }
