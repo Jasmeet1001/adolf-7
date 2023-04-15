@@ -7,6 +7,8 @@ urlpatterns = [
     path('admin/pricelist/', views.order_view_admin, name='order-view-admin'),
     path('distributor/', views.distributor_page, name='dashboard-distributor'),
     path('distributor/pricelist', views.order_view_distributor, name='order-view-distributor'),
+    path('distributor/ordersucessful', views.order_sucessful_distributor, name='order-sucessful-distributor'),
     path('retailer/', views.retailer_page, name='dashboard-retailer'),
     path('retailer/pricelist', views.order_view_retailer, name='order-view-retailer'),
+    path('retailer/ordersucessful', views.order_sucessful_retailer, name='order-sucessful-retailer'),
 ]

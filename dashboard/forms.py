@@ -10,6 +10,11 @@ class UserCreation(forms.Form):
     email = forms.EmailField(required=False)
     password = forms.CharField(widget=forms.PasswordInput)
 
+    class Media:
+        css = {
+            'all' : ('dashboard/css/stylesNewUser.css',)
+        }   
+
 class UserRole(forms.Form):
     CHOICES = (
         ('1', 'Adolf Admin'),

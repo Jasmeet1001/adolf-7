@@ -154,3 +154,13 @@ def distributor_page(request):
 @user_passes_test(is_retailer)
 def retailer_page(request):
     return render(request, 'dashboard/retailer.html')
+
+
+@login_required
+def order_sucessful_distributor(request):
+    return render(request, 'dashboard/orderConfirmedDistributor.html')
+
+
+@login_required
+def order_sucessful_retailer(request):
+    return render(request, 'dashboard/orderConfirmedRetailer.html')
