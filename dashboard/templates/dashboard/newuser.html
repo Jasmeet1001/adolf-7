@@ -42,8 +42,7 @@
         <div class="col-12">
             <div class="card overflow-auto">
                 <div class="card-body demo-wrapper">
-                    <div class="d-flex justify-content-between ">
-                        {% for message in messages %}
+                    {% for message in messages %}
                             {% if message.tags == 'error' %}
                                 <div class="alert alert-danger">
                                     {{ message }}
@@ -53,7 +52,8 @@
                                     {{ message }}
                                 </div>
                             {% endif %}
-                        {% endfor %}
+                    {% endfor %}
+                    <div class="d-flex justify-content-between">
                         <form method="post" id="order-form" class="demo">
                             {% csrf_token %}
                             <div class="choicesOptions">
@@ -79,6 +79,5 @@
                 </div>
             </div>
         </div>
-        <script src="{% static 'dashboard/js/showform.js' %}"></script>
     </div>
 {% endblock %}
