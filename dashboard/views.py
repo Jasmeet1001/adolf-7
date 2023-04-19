@@ -76,20 +76,21 @@ def create_new_user(request):
 
     return render(request, 'dashboard/newuser.html', context)
 
+def retailers_all(dist):
+    for distributer in dist:
+        yield distributer.retailers.all()
+
 @login_required
 @user_passes_test(is_admin)
 def admin_page(request):
     distributers_all = request.user.adolfadmin.distributers.all()
 
-    retailers_all = []
-    for distributer in distributers_all:
-        retailers_all.extend(distributer.retailers.all())
-    
-    print(retailers_all)
+    # all_retailers = [i for i in retailers_all(distributers_all)]
 
     context = {
         'dist_obj': distributers_all,
-        'ret_obj': retailers_all,
+        # 'ret_obj': all_retailers[0],
+        'ret_obj': retailers_all(distributers_all),
     }
 
     return render(request, 'dashboard/admin.html', context)

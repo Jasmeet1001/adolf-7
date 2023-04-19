@@ -77,3 +77,8 @@ class OrderRet(models.Model):
 
     def __str__(self):
         return f"{self.retailer.user.first_name} {self.retailer.user.last_name} {self.order_dist.product.vehical_type} {self.order_dist.product.color} {self.order_dist.product.product_name} {self.quantity}"
+
+class Cart(models.Model):
+    product = models.ForeignKey(PriceList, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField()
