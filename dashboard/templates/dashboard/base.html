@@ -28,7 +28,7 @@
                 </li>
                 <div class="dropdown-things">
                     <li>
-                        <a class="dropdown-item" href="#">Profile</a>
+                        {% block profile %}{% endblock %}
                     </li>
                     <li>
                         <a class="dropdown-item" href="{% url 'logout-view' %}">Logout</a>

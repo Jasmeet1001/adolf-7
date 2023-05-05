@@ -1,5 +1,8 @@
 from django.db import models
+from django.urls import reverse
+
 from register.models import User
+
 from PIL import Image
 
 # Create your models here.
@@ -22,7 +25,10 @@ class CommonInfo(models.Model):
 
 class AdolfAdmin(CommonInfo):
     def __str__(self):
-        return f"Adolf7 Admin: {self.user.first_name} {self.user.last_name}, {self.user.phone_number}"
+        return f"Admin: {self.user.first_name} {self.user.last_name}"
+    
+    def get_absolute_url(self):
+        return reverse("admin-update", kwargs={'pk': self.pk})
 
 class Distributer(CommonInfo):
     adolfAdmin = models.ForeignKey(AdolfAdmin, on_delete=models.PROTECT, related_name='distributers')
@@ -31,7 +37,10 @@ class Distributer(CommonInfo):
     company_address_dist = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
-        return f"{self.user.first_name} {self.user.last_name}, {self.user.phone_number}, {self.company_name_dist}, {self.company_address_dist}"
+        return f"{self.user.first_name} {self.user.last_name}, {self.company_name_dist}, {self.company_address_dist}"
+    
+    def get_absolute_url(self):
+        return reverse("distributor-update", kwargs={'pk': self.pk})
 
 class Retailer(CommonInfo):
     distributer = models.ForeignKey(Distributer, on_delete=models.PROTECT, related_name='retailers')
@@ -39,7 +48,10 @@ class Retailer(CommonInfo):
     company_name_ret = models.CharField(max_length=255, blank=True)
     company_address_ret = models.CharField(max_length=255, blank=True)
     def __str__(self):
-        return f"{self.user.first_name} {self.user.last_name}, {self.user.phone_number}, {self.company_name_ret}, {self.company_address_ret}"
+        return f"{self.user.first_name} {self.user.last_name}, {self.company_name_ret}, {self.company_address_ret}"
+    
+    def get_absolute_url(self):
+        return reverse("retailer-update", kwargs={'pk': self.pk})
 
 class PriceList(models.Model):
     vehical_type = models.CharField(max_length=255, null=True)

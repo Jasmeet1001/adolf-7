@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block pfp %}
-<img src="{{ user.adolfadmin.photo.url }}" alt="pfp" class="rounded-circle">
+<img src="{{ user.retailer.photo.url }}" alt="pfp" class="rounded-circle">
 {% endblock pfp %}
 
 
@@ -50,6 +50,7 @@
                                 <a class="nav-link dropdown-toggle text-end w-100" href="#" data-bs-toggle="dropdown"></a>
                                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                     <li class="dropdown-header text-start">
+                                        <form action="{% url 'order-view-retailer' %}" method="GET" class="d-flex">
                                         <h6 class="filter-tag text-center">Filters</h6>
                                     </li>
                                     <div class="dropdown-things text-start">
@@ -72,8 +73,7 @@
                                     </div>
                                 </ul>
                             </div>
-                            <form action="" class="d-flex">
-                                <input type="text" placeholder="Search..." required class="form-control searchInput">
+                                <input type="text" name="search-query" placeholder="Search..." required class="form-control searchInput">
                                 <button class="searchBtn"><i class='bx bx-search' ></i></button>
                             </form>
                         </div>
@@ -81,10 +81,10 @@
                     <table class="table table-borderless ">
                         <thead>
                             <tr class="table-heading">
+                                <th scope="col">Product Image</th>
                                 <th scope="col">Vehical Type</th>
                                 <th scope="col">Color</th>
                                 <th scope="col">Product Name</th>
-                                <th scope="col">Product Image</th>
                                 <th scope="col">Item Description</th>
                                 <th scope="col">uom</th>
                                 <th scope="col">Quantity</th>
@@ -94,10 +94,12 @@
                         <tbody>
                             {% for prices in pricelist_obj %}
                                 <tr>
+                                    <td>
+                                        <img src="{{ prices.product_image.url }}" alt="{{ prices.item_desc }}">
+                                    </td>
                                     <td>{{ prices.vehical_type }}</td>
                                     <td>{{ prices.color }}</td>
                                     <td>{{ prices.product_name }}</td>
-                                    <td>{{ prices.product_image }}</td>
                                     <td>{{ prices.item_desc }}</td>
                                     <td>{{ prices.uom }}</td>
     
@@ -116,16 +118,12 @@
                                       data-mrp_incl_gst_pu="{{prices.mrp_incl_gst_pu}}" 
                                       onclick="addItem(this)"><i class='bx bx-plus nav_icon'></i></button>
                                     </td>
-                                     {# <td> #}
-                                        {# <button type="button" class="btn btn-link btn-sm"> #}
-                                            {# <a href="{% url 'dashboard-edit' prices.id %}">Edit</a> #}
-                                        {# </button> #}
-                                    {# </td> #}
                                 </tr>
                             {% endfor %}
                         </tbody>
                     </table>
                 </div>
+            {% include 'dashboard/paginator.html' %}
             </div>
         </div>
         <div class="col-md-12 col-lg-4 marginLeft">

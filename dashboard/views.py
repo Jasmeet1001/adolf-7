@@ -1,7 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.paginator import Paginator
 from django.contrib import messages
+from django.views.generic import UpdateView
+from django.db.models import Q
 
 from .forms import UserRole, NewDist, NewRet, NewAdmin, UserCreation
 from .models import PriceList, AdolfAdmin, Distributer, Retailer
@@ -17,6 +20,30 @@ def is_distributer(user):
 
 def is_retailer(user):
     return Retailer.objects.filter(user=user).exists()
+
+class AdminUpdateView(LoginRequiredMixin, UpdateView):
+    model = AdolfAdmin
+    fields = '__all__'
+    template_name = 'dashboard/admin_update_view.html'
+
+class PriceListUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = PriceList
+    fields = '__all__'
+    template_name = 'dashboard/pricelist_edit.html'
+
+    def test_func(self):
+        return is_admin(self.request.user)
+
+class DistributorUpdateView(LoginRequiredMixin, UpdateView):
+    model = Distributer
+    fields = '__all__'
+    template_name = 'dashboard/distributor_update_view.html'
+
+class RetailerUpdateView(LoginRequiredMixin, UpdateView):
+    model = Retailer
+    fields = '__all__'
+    template_name = 'dashboard/retailer_update_view.html'
+
 
 @login_required
 @user_passes_test(is_admin)
@@ -45,16 +72,18 @@ def create_new_user(request):
                         temp = admin_form.save(commit=False)
                         temp.user = user
                         temp.save()
-
                         messages.success(request, 'New Admin Added')
+                        return redirect('admin-createuser')
 
                 if option == '2':
-                    dist_form = NewDist(request.POST, instance=request.user)
+                    dist_form = NewDist(request.POST)
                     if dist_form.is_valid() and user_form.is_valid():
                         temp = dist_form.save(commit=False)
                         temp.user = user
                         temp.save()
                         messages.success(request, 'New Distributer Added')
+                        return redirect('admin-createuser')
+
 
                 elif option == '3':
                     ret_form = NewRet(request.POST)
@@ -63,6 +92,7 @@ def create_new_user(request):
                         temp.user = user
                         temp.save()
                         messages.success(request, 'New Retailer Added')
+                        return redirect('admin-createuser')
     else:
         userrole_form = UserRole()
     
@@ -85,23 +115,43 @@ def retailers_all(dist):
 def admin_page(request):
     distributers_all = request.user.adolfadmin.distributers.all()
 
-    # all_retailers = [i for i in retailers_all(distributers_all)]
+    all_retailers = [i for i in retailers_all(distributers_all)]
 
     context = {
         'dist_obj': distributers_all,
-        # 'ret_obj': all_retailers[0],
-        'ret_obj': retailers_all(distributers_all),
+        'ret_obj': all_retailers[0],
     }
 
     return render(request, 'dashboard/admin.html', context)
 
 @login_required
 def order_view_admin(request):
-    pricelist_all = PriceList.objects.filter(id__lt=3143)
-    # pricelist_all = PriceList.objects.all()
-    
+    search_res = ''
+    q_query = Q()
+    pricelist_all = PriceList.objects.all()
+    if request.GET.get('search-query'):
+        search_res = request.GET.get('search-query')
+        if not(any([request.GET.get('UOM') or request.GET.get('Color') or request.GET.get('Product Name') or request.GET.get('Vehicle Type')])):
+            print('elif')
+            pricelist_all = pricelist_all.filter(Q(vehical_type__icontains=search_res)|Q(product_name__icontains=search_res)|Q(color__icontains=search_res)|Q(uom__icontains=search_res)).order_by('-id')
+        else:
+            if request.GET.get('Vehicle Type'):
+                q_query |= Q(vehical_type__icontains=search_res)
+            if request.GET.get('Product Name'):
+                q_query |= Q(product_name__icontains=search_res)
+            if request.GET.get('Color'):
+                q_query |= Q(color__icontains=search_res)
+            if request.GET.get('UOM'):
+                q_query |= Q(uom__icontains=search_res)
+            
+            pricelist_all = pricelist_all.filter(q_query)
+        
+    paginator = Paginator(pricelist_all, 15)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     context = {
-        'pricelist_obj': pricelist_all,
+        'pricelist_obj': page_obj,
     }
 
     return render(request, 'dashboard/neworderAdmin.html', context)
@@ -109,27 +159,71 @@ def order_view_admin(request):
 
 @login_required
 def order_view_distributor(request):
-    pricelist_all = PriceList.objects.filter(id__lt=190)
-    # pricelist_all = PriceList.objects.all()
+    search_res = ''
+    q_query = Q()
+    pricelist_all = PriceList.objects.all()
+    if request.GET.get('search-query'):
+        search_res = request.GET.get('search-query')
+        if not(any([request.GET.get('UOM') or request.GET.get('Color') or request.GET.get('Product Name') or request.GET.get('Vehicle Type')])):
+            print('elif')
+            pricelist_all = pricelist_all.filter(Q(vehical_type__icontains=search_res)|Q(product_name__icontains=search_res)|Q(color__icontains=search_res)|Q(uom__icontains=search_res)).order_by('-id')
+        else:
+            if request.GET.get('Vehicle Type'):
+                q_query |= Q(vehical_type__icontains=search_res)
+            if request.GET.get('Product Name'):
+                q_query |= Q(product_name__icontains=search_res)
+            if request.GET.get('Color'):
+                q_query |= Q(color__icontains=search_res)
+            if request.GET.get('UOM'):
+                q_query |= Q(uom__icontains=search_res)
+            
+            pricelist_all = pricelist_all.filter(q_query)
+        
+    paginator = Paginator(pricelist_all, 15)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
-    context = {    
-        'pricelist_obj': pricelist_all,
+    context = {
+        'pricelist_obj': page_obj,
     }
-
 
     return render(request, 'dashboard/neworderDistributor.html', context)
 
 @login_required
 def order_view_retailer(request):
-    pricelist_all = PriceList.objects.filter(id__lt=190)
-    # pricelist_all = PriceList.objects.all()
+    search_res = ''
+    q_query = Q()
+    pricelist_all = PriceList.objects.all()
+    if request.GET.get('search-query'):
+        search_res = request.GET.get('search-query')
+        if not(any([request.GET.get('UOM') or request.GET.get('Color') or request.GET.get('Product Name') or request.GET.get('Vehicle Type')])):
+            print('elif')
+            pricelist_all = pricelist_all.filter(Q(vehical_type__icontains=search_res)|Q(product_name__icontains=search_res)|Q(color__icontains=search_res)|Q(uom__icontains=search_res)).order_by('-id')
+        else:
+            if request.GET.get('Vehicle Type'):
+                q_query |= Q(vehical_type__icontains=search_res)
+            if request.GET.get('Product Name'):
+                q_query |= Q(product_name__icontains=search_res)
+            if request.GET.get('Color'):
+                q_query |= Q(color__icontains=search_res)
+            if request.GET.get('UOM'):
+                q_query |= Q(uom__icontains=search_res)
+            
+            pricelist_all = pricelist_all.filter(q_query)
+        
+    paginator = Paginator(pricelist_all, 15)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
-    context = {    
-        'pricelist_obj': pricelist_all,
+    context = {
+        'pricelist_obj': page_obj,
     }
 
-
     return render(request, 'dashboard/neworderRetailer.html', context)
+
+def add_to_cart(request):
+    if request.GET.get(''):
+        pass
 
 @login_required
 @user_passes_test(is_distributer)
