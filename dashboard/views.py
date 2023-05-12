@@ -21,10 +21,13 @@ def is_distributer(user):
 def is_retailer(user):
     return Retailer.objects.filter(user=user).exists()
 
-class AdminUpdateView(LoginRequiredMixin, UpdateView):
+class AdminUpdateView(LoginRequiredMixin, UpdateView, UserPassesTestMixin):
     model = AdolfAdmin
     fields = '__all__'
     template_name = 'dashboard/admin_update_view.html'
+
+    def test_func(self):
+        return is_admin(self.request.user)
 
 class PriceListUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = PriceList
@@ -34,15 +37,21 @@ class PriceListUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def test_func(self):
         return is_admin(self.request.user)
 
-class DistributorUpdateView(LoginRequiredMixin, UpdateView):
+class DistributorUpdateView(LoginRequiredMixin, UpdateView, UserPassesTestMixin):
     model = Distributer
     fields = '__all__'
     template_name = 'dashboard/distributor_update_view.html'
 
-class RetailerUpdateView(LoginRequiredMixin, UpdateView):
+    def test_func(self):
+        return is_distributer(self.request.user)
+
+class RetailerUpdateView(LoginRequiredMixin, UpdateView, UserPassesTestMixin):
     model = Retailer
     fields = '__all__'
     template_name = 'dashboard/retailer_update_view.html'
+
+    def test_func(self):
+        return is_retailer(self.request.user)
 
 
 @login_required
