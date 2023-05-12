@@ -10,6 +10,8 @@ from .forms import UserRole, NewDist, NewRet, NewAdmin, UserCreation
 from .models import PriceList, AdolfAdmin, Distributer, Retailer
 from register.models import User
 
+import random
+
 # Create your views here.
 
 def is_admin(user):
@@ -126,10 +128,20 @@ def admin_page(request):
 
     all_retailers = [i for i in retailers_all(distributers_all)]
 
-    context = {
-        'dist_obj': distributers_all,
-        'ret_obj': all_retailers[0],
-    }
+    if(len(all_retailers[0]) == 0):
+        context = {
+            'dist_obj': distributers_all,
+            'ret_obj': '',
+            'top_selling': PriceList.objects.last(),
+            'random_value' : random.choice([i for i in range(100)]) 
+        }
+    else:
+        context = {
+            'dist_obj': distributers_all,
+            'ret_obj': all_retailers[0],
+            'top_selling': PriceList.objects.last(),
+            'random_value' : random.choice([i for i in range(100)])     
+        }  
 
     return render(request, 'dashboard/admin.html', context)
 
@@ -237,7 +249,13 @@ def add_to_cart(request):
 @login_required
 @user_passes_test(is_distributer)
 def distributor_page(request):
-    return render(request, 'dashboard/distributer.html')
+    retailer_all = request.user.distributer.retailers.all()
+
+    context = {
+        'ret_obj': retailer_all,
+    }  
+
+    return render(request, 'dashboard/distributer.html', context)
 
 @login_required
 @user_passes_test(is_retailer)

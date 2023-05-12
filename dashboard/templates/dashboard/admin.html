@@ -58,7 +58,7 @@
                     <table class="table table-borderless ">
                         <thead>
                             <tr class="table-heading">
-                                <th scope="col">#</th>
+                                <th scope="col"></th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Company Name</th>
                                 <th scope="col">Company Address</th>
@@ -69,7 +69,7 @@
                         <tbody>
                             {% for dist in dist_obj %}
                             <tr>
-                                <th scope="row">{{ dist.id }}</th>
+                                <th scope="row"></th>
                                 <td>{{ dist.user.first_name }} {{ dist.user.last_name }}</td>
                                 <td >
                                     <a href="" class="text-primary recent-t">{{ dist.company_name_dist }}</a>
@@ -89,6 +89,15 @@
             <!-- Retailer Starts -->
             <div class="col-12">
                 <div class="card recent-sales mt-3 overflow-auto">
+                    {% if not ret_obj %} 
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h5 class="card-title">
+                                    No Retailers
+                                </h5>
+                            </div>
+                        </div>
+                    {% else %}
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <h5 class="card-title">
@@ -96,10 +105,11 @@
                             </h5>
                         </div>
                     </div>
+                    
                     <table class="table table-borderless ">
                         <thead>
                             <tr class="table-heading">
-                                <th scope="col">#</th>
+                                <th scope="col"></th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Shop Name</th>
                                 <th scope="col">Shop Address</th>
@@ -110,7 +120,7 @@
                         <tbody>
                             {% for ret in ret_obj %}
                             <tr>
-                                <th scope="row">{{ ret.id }}</th>
+                                <th scope="row"></th>
                                 <td>
                                     {{ ret.user.first_name }} {{ ret.user.last_name }}
                                 </td>
@@ -130,12 +140,13 @@
                             {% endfor %}
                         </tbody>
                     </table>
+                    {% endif %}
                 </div>
             </div>
         </div>
 
         <!-- Recent Order Starts -->
-        <div class="col-12">
+        <!-- <div class="col-12">
             <div class="card mt-3 recent-activity">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
@@ -199,7 +210,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <!-- Top Selling Starts -->
         <div class="col-12">
@@ -239,41 +250,19 @@
                         <thead>
                             <tr class="table-heading">
                                 <th scope="col">Preview</th>
-                                <th scope="col">Product</th>
+                                <th scope="col">Product Name</th>
                                 <th scope="col">Price</th>
                                 <th scope="col">Sold</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <th scope="row">
-                                    <a href="#" class="top-selling-img">
-                                        <img src="{% static 'dashboard/img/pp.PNG'%}"  alt="pfp">
-                                    </a>
-                                </th>
-                                <td class="text-primary">Brandon Jacob</td>
-                                <td>$64</td>
-                                <td>64</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <a href="#" class="top-selling-img">
-                                        <img src="{% static 'dashboard/img/pp.PNG'%}"  alt="">
-                                    </a>
-                                </th>
-                                <td class="text-primary">Bridie Kessler</td>
-                                <td>$64</td>
-                                <td>64</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <a href="#" class="top-selling-img">
-                                        <img src="{% static 'dashboard/img/pp.PNG'%}"  alt="">
-                                    </a>
-                                </th>
-                                <td class="text-primary">Ashleigh Langosh</td>
-                                <td>$64</td>
-                                <td>64</td>
+                                <td>
+                                    <img src="{{ top_selling.product_image.url }}" alt="{{ top_selling.item_desc }}">
+                                </td>
+                                <td>{{ top_selling.product_name }}</td>
+                                <td>₹{{ top_selling.mrp_incl_gst_pu }}</td>
+                                <td>{{random_value}}</td>
                             </tr>
                         </tbody>
                     </table>
