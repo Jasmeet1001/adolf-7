@@ -1,5 +1,10 @@
 {% extends 'dashboard/base.html' %}
-{% load static %}
+{% load static %}   
+
+{% block pfp %}
+<img src="{{ user.adolfadmin.photo.url }}" alt="pfp" class="rounded-circle">
+{% endblock pfp %}
+
 
 {% block content %}
 <div class="l-navbar" id="nav-bar">

@@ -1,6 +1,15 @@
 {% extends 'dashboard/base.html' %}
 {% load static %}
 
+{% block pfp %}
+<img src="{{ user.adolfadmin.photo.url }}" alt="pfp" class="rounded-circle">
+{% endblock pfp %}
+
+{% block profile %}
+<a class="dropdown-item" href="{% url 'admin-update' request.user.adolfadmin.pk %}">Profile</a>
+{% endblock profile %}
+
+
 {% block content %}
 <div class="l-navbar" id="nav-bar">
     <nav class="nav">

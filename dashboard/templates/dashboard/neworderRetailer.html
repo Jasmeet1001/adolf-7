@@ -5,6 +5,9 @@
 <img src="{{ user.retailer.photo.url }}" alt="pfp" class="rounded-circle">
 {% endblock pfp %}
 
+{% block profile %}
+<a class="dropdown-item" href="{% url 'retailer-update' request.user.retailer.pk %}">Profile</a>
+{% endblock profile %}
 
 {% block content %}
     <div class="l-navbar" id="nav-bar">
@@ -28,10 +31,6 @@
                         <i class='bx bx-rupee nav_icon'></i> 
                         <span class="nav_name">Payments</span>
                     </a> 
-                    <!-- <a href="{% url 'admin-createuser' %}" class="nav_link"> 
-                        <i class='bx bx-user-plus'></i>
-                        <span class="nav_name">Create User</span>
-                    </a>  -->
                 </div>
             </div> 
         </nav>
@@ -122,8 +121,8 @@
                             {% endfor %}
                         </tbody>
                     </table>
+                    {% include 'dashboard/paginator.html' %}
                 </div>
-            {% include 'dashboard/paginator.html' %}
             </div>
         </div>
         <div class="col-md-12 col-lg-4 marginLeft">

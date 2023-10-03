@@ -1,28 +1,30 @@
-<nav>
-    <ul class="pagination mb-0">
-    {% if pricelist_obj.has_previous %}
-        <li class="page-item"><a class="page-link link-dark" href="?{% if search %}search-result={{ search }}&{% endif %}page=1">First</a></li>
-        <li class="page-item"><a class="page-link link-dark" href="?{% if search %}search-result={{ search }}&{% endif %}page={{ pricelist_obj.previous_page_number }}">Previous</a></li>
-    {% else %}
-        <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-    {% endif %}
-
-    {% for num in pricelist_obj.paginator.page_range %}
-        {% if pricelist_obj.number == num %}
-            <li class="page-item active"><a class="page-link link-dark" href="?{% if search %}search-result={{ search }}&{% endif %}page={{ num }}">{{ num }}</a></li>
-        {% elif num > pricelist_obj.number|add:'-3' and num < pricelist_obj.number|add:'3' %}
-            <li class="page-item"><a class="page-link link-dark" href="?{% if search %}search-result={{ search }}&{% endif %}page={{ num }}">{{ num }}</a></li>
+<div class="d-flex justify-content-between">
+    <div class="fw-normal small mt-4 mt-lg-0 align-self-center">
+        Page {{ pricelist_obj.number }} of {{ pricelist_obj.paginator.num_pages }}
+    </div>
+    <nav>
+        <ul class="pagination mb-0">
+        {% if pricelist_obj.has_previous %}
+            <li class="page-item"><a class="page-link link-dark" href="?{% if search %}search-result={{ search }}&{% endif %}page=1">First</a></li>
+            <li class="page-item"><a class="page-link link-dark" href="?{% if search %}search-result={{ search }}&{% endif %}page={{ pricelist_obj.previous_page_number }}">Previous</a></li>
+        {% else %}
+            <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
         {% endif %}
-    {% endfor %}
-
-    {% if pricelist_obj.has_next %}
-        <li class="page-item"><a class="page-link link-dark" href="?{% if search %}search-result={{ search }}&{% endif %}page={{ pricelist_obj.next_page_number }}">Next</a></li>
-        <li class="page-item"><a class="page-link link-dark" href="?{% if search %}search-result={{ search }}&{% endif %}page={{ pricelist_obj.paginator.num_pages }}">Last</a></li>
-    {% else %}
-        <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
-    {% endif %}
-    </ul>
-</nav>
-<div class="fw-normal small mt-4 mt-lg-0">
-    Page {{ pricelist_obj.number }} of {{ pricelist_obj.paginator.num_pages }}
+    
+        {% for num in pricelist_obj.paginator.page_range %}
+            {% if pricelist_obj.number == num %}
+                <li class="page-item active"><a class="page-link link-dark" href="?{% if search %}search-result={{ search }}&{% endif %}page={{ num }}">{{ num }}</a></li>
+            {% elif num > pricelist_obj.number|add:'-3' and num < pricelist_obj.number|add:'3' %}
+                <li class="page-item"><a class="page-link link-dark" href="?{% if search %}search-result={{ search }}&{% endif %}page={{ num }}">{{ num }}</a></li>
+            {% endif %}
+        {% endfor %}
+    
+        {% if pricelist_obj.has_next %}
+            <li class="page-item"><a class="page-link link-dark" href="?{% if search %}search-result={{ search }}&{% endif %}page={{ pricelist_obj.next_page_number }}">Next</a></li>
+            <li class="page-item"><a class="page-link link-dark" href="?{% if search %}search-result={{ search }}&{% endif %}page={{ pricelist_obj.paginator.num_pages }}">Last</a></li>
+        {% else %}
+            <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+        {% endif %}
+        </ul>
+    </nav>
 </div>

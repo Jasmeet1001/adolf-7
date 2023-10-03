@@ -5,6 +5,10 @@
 <img src="{{ user.distributer.photo.url }}" alt="pfp" class="rounded-circle">
 {% endblock pfp %}
 
+{% block profile %}
+<a class="dropdown-item" href="{% url 'distributor-update' request.user.distributer.pk %}">Profile</a>
+{% endblock profile %}
+
 
 {% block content %}
     <div class="l-navbar" id="nav-bar">
@@ -122,8 +126,8 @@
                             {% endfor %}
                         </tbody>
                     </table>
+                    {% include 'dashboard/paginator.html' %}
                 </div>
-                {% include 'dashboard/paginator.html' %}
             </div>
         </div>
         <div class="col-md-12 col-lg-4 marginLeft">
